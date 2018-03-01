@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context="com.ctyeung.mybakingapp.MainActivity">
 
+    <TextView
+        android:id="@+id/tv_network_error_display"
+        android:padding="16dp"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="22sp"
+        android:text="Please check network.."/>
+
+    <ProgressBar
+        android:id="@+id/pb_display_progress"
+        android:visibility="invisible"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_list"
         android:layout_width="match_parent"

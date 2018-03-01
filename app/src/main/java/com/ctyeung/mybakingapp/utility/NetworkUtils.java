@@ -1,4 +1,4 @@
-package utility;
+package com.ctyeung.mybakingapp.utility;
 
 /**
  * Created by ctyeung on 2/25/18.

@@ -1,4 +1,4 @@
-package utility;
+package com.ctyeung.mybakingapp.utility;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
