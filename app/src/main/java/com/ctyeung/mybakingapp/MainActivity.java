@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import com.ctyeung.mybakingapp.utility.NetworkUtils;
 import com.ctyeung.mybakingapp.data.Recipe;
 import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
+import com.ctyeung.mybakingapp.RecipeListAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,25 +33,30 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
     private ProgressBar mLoadingIndicator;
     private RecipeListAdapter.ListItemClickListener mListener;
     private TextView mNetworkErrorDisplay;
+    private RecipeListAdapter mListAdapter;
+    private RecyclerView mRecyclerViewList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_display_progress);
         mNetworkErrorDisplay = (TextView) findViewById(R.id.tv_network_error_display);
+        mRecyclerViewList = (RecyclerView) findViewById(R.id.recipe_list);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        requestRecipes();
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
     }
 
     protected void requestRecipes()
@@ -96,8 +103,10 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
         protected void onPostExecute(String str)
         {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
-            JSONObject json = JSONHelper.parseJson(str);
+            JSONArray jsonArray = JSONHelper.parseJsonArray(str);
+            JSONObject json = JSONHelper.parseJsonFromArray(jsonArray, 0);
 
+            /*
             if(null != json)
             {
                 JSONArray jsonArray = JSONHelper.getJsonArray(json, "results");
@@ -106,18 +115,14 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
                 if(null!=recipes &&
                         recipes.size()>0)
                 {
-                    populateRecipeList();
+                    mListAdapter = new RecipeListAdapter(recipes.size(), mListener, jsonArray);
+                    mRecyclerViewList.setAdapter(mListAdapter);
                     return;
                 }
-            }
+            }*/
 
             // display error if no data is available
             mNetworkErrorDisplay.setVisibility(View.VISIBLE);
-        }
-
-        protected void populateRecipeList()
-        {
-
         }
     }
 
