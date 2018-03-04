@@ -3,8 +3,10 @@ package com.ctyeung.mybakingapp;
  * Created by ctyeung on 2/25/18.
  */
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,6 +15,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import android.content.res.Resources;
+import com.ctyeung.mybakingapp.utility.JSONHelper;
+import com.ctyeung.mybakingapp.data.Recipe;
 
 import com.ctyeung.mybakingapp.R;
 
@@ -23,9 +27,9 @@ import com.ctyeung.mybakingapp.R;
     public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.ItemViewHolder>
     {
         private static final String TAG = RecipeListAdapter.class.getSimpleName();
-        private int mViewHolderCount;
+        private static int mViewHolderCount;
         private int mNumberItems;
-        private JSONArray mJsonArray;
+        private List<Recipe> mRecipes;
 
         final private ListItemClickListener mClickListener;
 
@@ -36,16 +40,33 @@ import com.ctyeung.mybakingapp.R;
 
         public RecipeListAdapter(int numberOfItems,
                                    ListItemClickListener listener,
-                                   JSONArray jsonArray)
+                                   List<Recipe> recipes)
         {
-            mJsonArray = jsonArray;
+            mRecipes = recipes;
             mNumberItems = numberOfItems;
             mClickListener = listener;
         }
         @Override
-        public ItemViewHolder onCreateViewHolder(ViewGroup parent,
-                                                 int viewType) {
-            return null;
+        public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
+                                                 int viewType)
+        {
+            Context context = viewGroup.getContext();
+            int layoutIdForListItem = R.layout.recycler_list_item;
+
+            LayoutInflater inflater = LayoutInflater.from(context);
+            boolean shouldAttachToParentImmediately = false;
+
+            View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+            ItemViewHolder viewHolder = new ItemViewHolder(view);
+
+            Recipe recipe = mRecipes.get(mViewHolderCount);
+            String name = recipe.getName();
+            viewHolder.button.setText(name);
+
+            Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: " + mViewHolderCount);
+
+            mViewHolderCount++;
+            return viewHolder;
         }
 
         /**
@@ -66,7 +87,8 @@ import com.ctyeung.mybakingapp.R;
         }
 
         @Override
-        public int getItemCount() {
+        public int getItemCount()
+        {
             return mNumberItems;
         }
 

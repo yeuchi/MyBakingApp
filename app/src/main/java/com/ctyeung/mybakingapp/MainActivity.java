@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -45,7 +46,10 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
 
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_display_progress);
         mNetworkErrorDisplay = (TextView) findViewById(R.id.tv_network_error_display);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         mRecyclerViewList = (RecyclerView) findViewById(R.id.recipe_list);
+        mRecyclerViewList.setLayoutManager(layoutManager);
 
         requestRecipes();
 
@@ -104,25 +108,23 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
         {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             JSONArray jsonArray = JSONHelper.parseJsonArray(str);
-            JSONObject json = JSONHelper.parseJsonFromArray(jsonArray, 0);
 
-            /*
-            if(null != json)
+            if(null == jsonArray)
             {
-                JSONArray jsonArray = JSONHelper.getJsonArray(json, "results");
-                recipes = RecipeFactory.Create(jsonArray);
+                mNetworkErrorDisplay.setVisibility(View.VISIBLE);
+                return;
+            }
 
-                if(null!=recipes &&
-                        recipes.size()>0)
-                {
-                    mListAdapter = new RecipeListAdapter(recipes.size(), mListener, jsonArray);
-                    mRecyclerViewList.setAdapter(mListAdapter);
-                    return;
-                }
-            }*/
+            recipes = RecipeFactory.Create(jsonArray);
 
-            // display error if no data is available
-            mNetworkErrorDisplay.setVisibility(View.VISIBLE);
+            if(null!=recipes &&
+                    recipes.size()>0)
+            {
+                mListAdapter = new RecipeListAdapter(recipes.size(), mListener, recipes);
+                mRecyclerViewList.setAdapter(mListAdapter);
+                mRecyclerViewList.setHasFixedSize(true);
+                return;
+            }
         }
     }
 
