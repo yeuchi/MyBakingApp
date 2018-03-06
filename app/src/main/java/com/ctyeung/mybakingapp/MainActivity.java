@@ -1,5 +1,6 @@
 package com.ctyeung.mybakingapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import android.widget.Toast;
 
 import com.ctyeung.mybakingapp.utility.NetworkUtils;
 import com.ctyeung.mybakingapp.data.Recipe;
@@ -30,6 +33,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity  implements RecipeListAdapter.ListItemClickListener {
 
+    private Toast mToast;
     private List<Recipe> recipes;
     private ProgressBar mLoadingIndicator;
     private RecipeListAdapter.ListItemClickListener mListener;
@@ -129,14 +133,26 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
     }
 
     @Override
-    public void onListItemClick(int clickItemIndex) {
+    public void onListItemClick(int clickItemIndex)
+    {
+        if(mToast!=null)
+            mToast.cancel();
 
+        Recipe selectedRecipe = recipes.get(clickItemIndex);
+
+        // load detail page
+        Intent intent = new Intent(this, DetailActivity.class);
+        String mergeString = "";
+        intent.putExtra(Intent.EXTRA_TEXT, mergeString);
+        startActivity(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 

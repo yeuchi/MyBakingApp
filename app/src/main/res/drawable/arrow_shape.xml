@@ -14,6 +14,7 @@
 
     <!-- This rectangle for the top arrow edge -->
     <!-- Its color should be the same as the layout's background -->
+    <!--
     <item
         android:top="-400dp"
         android:bottom="65dp"
@@ -25,10 +26,11 @@
             </shape>
         </rotate>
     </item>
+    -->
 
     <!-- This rectangle for the lower arrow edge -->
     <!-- Its color should be the same as the layout's background -->
-
+<!--
     <item
         android:top="65dp"
         android:bottom="-400dp"
@@ -40,4 +42,5 @@
             </shape>
         </rotate>
     </item>
+    -->
 </layer-list>
