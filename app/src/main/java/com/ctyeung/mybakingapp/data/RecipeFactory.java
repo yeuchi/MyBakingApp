@@ -13,15 +13,29 @@ import com.ctyeung.mybakingapp.utility.JSONHelper;
 
 public class RecipeFactory
 {
-    public static List<Recipe> Create(JSONArray movieList)
+    public static List<Recipe> Create(JSONArray recipeJSON)
     {
         List<Recipe> recipes = new ArrayList<Recipe>();
-        for(int i=0; i<movieList.length(); i++)
+        for(int i=0; i<recipeJSON.length(); i++)
         {
-            JSONObject json = JSONHelper.parseJsonFromArray(movieList, i);
+            JSONObject json = JSONHelper.parseJsonFromArray(recipeJSON, i);
             Recipe recipe = new Recipe(json);
             recipes.add(i, recipe);
         }
         return recipes;
+    }
+
+    public static List<Step> ParseDetails(JSONArray detailJSON)
+    {
+        List<Step> steps = new ArrayList<Step>();
+
+        // insert ingredient as 1st step
+        for(int i=0; i<detailJSON.length(); i++)
+        {
+            JSONObject json = JSONHelper.parseJsonFromArray(detailJSON, i);
+            Step step = new Step(json);
+            steps.add(i, step);
+        }
+        return steps;
     }
 }

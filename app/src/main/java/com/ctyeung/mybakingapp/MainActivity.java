@@ -142,8 +142,7 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
 
         // load detail page
         Intent intent = new Intent(this, DetailActivity.class);
-        String mergeString = "";
-        intent.putExtra(Intent.EXTRA_TEXT, mergeString);
+        intent.putExtra(Intent.EXTRA_TEXT, selectedRecipe.toString());
         startActivity(intent);
     }
 
