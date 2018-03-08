@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity  implements RecipeListAdapte
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         mRecyclerViewList = (RecyclerView) findViewById(R.id.recipe_list);
         mRecyclerViewList.setLayoutManager(layoutManager);
+        mListener = this;
 
         requestRecipes();
 

@@ -30,8 +30,7 @@ import com.ctyeung.mybakingapp.R;
         private static int mViewHolderCount;
         private int mNumberItems;
         private List<Recipe> mRecipes;
-
-        final private ListItemClickListener mClickListener;
+        private ListItemClickListener mClickListener;
 
         public interface ListItemClickListener
         {
