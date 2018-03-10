@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         Recipe selectedRecipe = recipes.get(clickItemIndex);
 
         // load detail page
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, StepsActivity.class);
         String str = selectedRecipe.getJSONString();
         intent.putExtra(Intent.EXTRA_TEXT, str);
         startActivity(intent);

@@ -23,8 +23,8 @@ import org.json.JSONObject;
  * Created by ctyeung on 3/5/18.
  */
 
-public class DetailActivity extends AppCompatActivity
-    implements com.ctyeung.mybakingapp.StepListAdapter.ListItemClickListener
+public class StepsActivity extends AppCompatActivity
+        implements com.ctyeung.mybakingapp.StepListAdapter.ListItemClickListener
 
 {
     private Toast _toast;
@@ -38,10 +38,10 @@ public class DetailActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_steps);
 
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
-        mRecipeList = (RecyclerView) findViewById(R.id.detail_list);
+        mRecipeList = (RecyclerView) findViewById(R.id.step_list);
         mRecipeList.setLayoutManager(reviewManager);
         mListener = this;
         parseSteps();
@@ -51,8 +51,8 @@ public class DetailActivity extends AppCompatActivity
     {
         String str = this.getIntent().getStringExtra(Intent.EXTRA_TEXT);
         JSONObject json = JSONHelper.parseJson(str);
-        Recipe recipe = new Recipe(json);
-        mSteps = RecipeFactory.GetDetails(recipe.getSteps());
+        mRecipe = new Recipe(json);
+        mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
 
         mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps);
         mRecipeList.setAdapter(mListAdapter);
@@ -62,15 +62,13 @@ public class DetailActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
-        // ingredients
-        if(0==clickItemIndex)
-        {
+        Intent intent = (0==clickItemIndex)?
+                    new Intent(this, IngredientsActivity.class):    // 0 index - ingredients
+                    new Intent(this, StepDetailActivity.class);     // all other steps
 
-        }
-        else
-        {
-
-        }
+        String str = mRecipe.getJSONString();
+        intent.putExtra(Intent.EXTRA_TEXT, str);
+        startActivity(intent);
     }
 
 }

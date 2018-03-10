@@ -32,9 +32,14 @@ public class Recipe
         return JSONHelper.parseValueByKey(json, "name");
     }
 
-    public String getIngredients()
+    /*
+     * below 2 methods can be consolidated !!!!
+     */
+    public JSONArray getIngredients()
     {
-        return JSONHelper.parseValueByKey(json, "ingredient");
+        String str = JSONHelper.parseValueByKey(json, "ingredients");
+        JSONArray array = JSONHelper.parseJsonArray(str);
+        return array;
     }
 
     public JSONArray getSteps()

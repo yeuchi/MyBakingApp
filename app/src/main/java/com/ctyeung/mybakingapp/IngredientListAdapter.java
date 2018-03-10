@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ctyeung.mybakingapp.data.Ingredient;
 import com.ctyeung.mybakingapp.data.Step;
 
 import java.util.List;
@@ -16,12 +17,12 @@ import java.util.List;
  * Created by ctyeung on 3/6/18.
  */
 
-public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemViewHolder>
+public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAdapter.ItemViewHolder>
 {
-    private static final String TAG = StepListAdapter.class.getSimpleName();
+    private static final String TAG = IngredientListAdapter.class.getSimpleName();
     private static int mViewHolderCount;
     private int mNumberItems;
-    private List<Step> mSteps;
+    private List<Ingredient> mIngredients;
 
     final private ListItemClickListener mClickListener;
 
@@ -30,11 +31,11 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         void onListItemClick(int clickItemIndex);
     }
 
-    public StepListAdapter(int numberOfItems,
-                           ListItemClickListener listener,
-                             List<Step> steps)
+    public IngredientListAdapter(int numberOfItems,
+                                ListItemClickListener listener,
+                                List<Ingredient> ingredients)
     {
-        mSteps = steps;
+        mIngredients = ingredients;
         mNumberItems = numberOfItems;
         mClickListener = listener;
     }
@@ -43,7 +44,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
                                              int viewType)
     {
         Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.recycler_step_list_item;
+        int layoutIdForListItem = R.layout.recycler_ingredient_list_item;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
@@ -51,9 +52,15 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         ItemViewHolder viewHolder = new ItemViewHolder(view);
 
-        Step step = mSteps.get(mViewHolderCount);
-        String name = step.getShortDescription();
-        viewHolder.button.setText(name);
+        Ingredient ingredient = mIngredients.get(mViewHolderCount);
+        String quantity = ingredient.getQuantity();
+        viewHolder.textViewQuantity.setText("Quantity: "+quantity);
+
+        String measure = ingredient.getMeasure();
+        viewHolder.textViewMeasure.setText("Measure: "+measure);
+
+        String stuff = ingredient.getIngredient();
+        viewHolder.textViewIngredient.setText("Ingredient: "+stuff);
 
         Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: " + mViewHolderCount);
 
@@ -72,7 +79,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(StepListAdapter.ItemViewHolder holder,
+    public void onBindViewHolder(IngredientListAdapter.ItemViewHolder holder,
                                  int position) {
         Log.d(TAG, "#" + position);
         holder.bind(position);
@@ -86,14 +93,17 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        TextView button;
+        TextView textViewQuantity;
+        TextView textViewMeasure;
+        TextView textViewIngredient;
 
         public ItemViewHolder(View itemView)
         {
             super(itemView);
 
-            button = (TextView) itemView.findViewById(R.id.step_item);
-            button.setOnClickListener(this);
+            textViewQuantity = (TextView) itemView.findViewById(R.id.quantity_item);
+            textViewMeasure = (TextView) itemView.findViewById(R.id.measure_item);
+            textViewIngredient = (TextView) itemView.findViewById(R.id.ingredient_item);
         }
 
         /**
@@ -110,8 +120,6 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         @Override
         public void onClick(View view)
         {
-            int clickPosition = getAdapterPosition();
-            mClickListener.onListItemClick(clickPosition);
         }
     }
 }

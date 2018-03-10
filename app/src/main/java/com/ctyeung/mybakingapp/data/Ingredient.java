@@ -28,4 +28,19 @@ public class Ingredient
     {
         return json.toString();
     }
+
+    public String getQuantity()
+    {
+        return JSONHelper.parseValueByKey(json, "quantity");
+    }
+
+    public String getMeasure()
+    {
+        return JSONHelper.parseValueByKey(json, "measure");
+    }
+
+    public String getIngredient()
+    {
+        return JSONHelper.parseValueByKey(json, "ingredient");
+    }
 }

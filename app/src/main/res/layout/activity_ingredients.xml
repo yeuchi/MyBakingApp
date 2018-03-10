@@ -18,14 +18,9 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/detail_list"
+                android:id="@+id/ingredient_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hello world"/>
 
         </LinearLayout>
     </ScrollView>

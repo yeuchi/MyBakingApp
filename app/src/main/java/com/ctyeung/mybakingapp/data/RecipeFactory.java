@@ -13,6 +13,9 @@ import com.ctyeung.mybakingapp.utility.JSONHelper;
 
 public class RecipeFactory
 {
+    /*
+     * methods below can be refactored by using an interface !!!
+     */
     public static List<Recipe> Create(JSONArray recipeJSON)
     {
         List<Recipe> recipes = new ArrayList<Recipe>();
@@ -25,7 +28,7 @@ public class RecipeFactory
         return recipes;
     }
 
-    public static List<Step> GetDetails(JSONArray detailJSON)
+    public static List<Step> StepsJsonArray2List(JSONArray stepsJSON)
     {
         List<Step> steps = new ArrayList<Step>();
 
@@ -35,12 +38,25 @@ public class RecipeFactory
         steps.add(0, step);
 
         // insert detail steps
-        for(int i=0; i<detailJSON.length(); i++)
+        for(int i=0; i<stepsJSON.length(); i++)
         {
-            JSONObject json = JSONHelper.parseJsonFromArray(detailJSON, i);
+            JSONObject json = JSONHelper.parseJsonFromArray(stepsJSON, i);
             step = new Step(json);
             steps.add(i+1, step);
         }
         return steps;
+    }
+
+    public static List<Ingredient> IngredientsJsonArray2List(JSONArray jsonArray)
+    {
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+
+        for(int i=0; i<jsonArray.length(); i++)
+        {
+            JSONObject json = JSONHelper.parseJsonFromArray(jsonArray, i);
+            Ingredient ingredient = new Ingredient(json);
+            ingredients.add(i, ingredient);
+        }
+        return ingredients;
     }
 }
