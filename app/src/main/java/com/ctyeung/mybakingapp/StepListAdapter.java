@@ -43,7 +43,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
                                              int viewType)
     {
         Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.recycler_list_item;
+        int layoutIdForListItem = R.layout.recycler_detail_list_item;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
@@ -92,7 +92,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         {
             super(itemView);
 
-            button = (TextView) itemView.findViewById(R.id.recipe_item);
+            button = (TextView) itemView.findViewById(R.id.detail_item);
             button.setOnClickListener(this);
         }
 

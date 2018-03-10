@@ -31,7 +31,6 @@ public class DetailActivity extends AppCompatActivity
     private RecyclerView mRecipeList;
     private StepListAdapter.ListItemClickListener mListener;
     private StepListAdapter mListAdapter;
-    private RecyclerView mRecyclerViewList;
     private List<Step> mSteps;
     private Recipe mRecipe;
 
@@ -56,8 +55,8 @@ public class DetailActivity extends AppCompatActivity
         mSteps = RecipeFactory.ParseDetails(recipe.getSteps());
 
         mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps);
-        mRecyclerViewList.setAdapter(mListAdapter);
-        mRecyclerViewList.setHasFixedSize(true);
+        mRecipeList.setAdapter(mListAdapter);
+        mRecipeList.setHasFixedSize(true);
     }
 
     @Override
