@@ -1,5 +1,7 @@
 package com.ctyeung.mybakingapp.data;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 /**
@@ -12,11 +14,17 @@ import org.json.JSONObject;
 public class Step
 {
     private JSONObject json;
-    private String recipe;
 
-    public Step()
+    public Step(String str )
     {
-
+        try
+        {
+            this.json = new JSONObject(str);
+        }
+        catch(Exception ex)
+        {
+            Log.e("Step() constructor",Log.getStackTraceString(ex));
+        }
     }
 
     public Step(JSONObject json)

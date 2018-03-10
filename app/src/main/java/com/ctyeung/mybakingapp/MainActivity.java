@@ -31,7 +31,8 @@ import com.ctyeung.mybakingapp.RecipeListAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity  implements RecipeListAdapter.ListItemClickListener {
+public class MainActivity extends AppCompatActivity
+        implements RecipeListAdapter.ListItemClickListener {
 
     private Toast mToast;
     private List<Recipe> recipes;

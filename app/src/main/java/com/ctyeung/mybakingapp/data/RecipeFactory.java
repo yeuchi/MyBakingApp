@@ -25,16 +25,21 @@ public class RecipeFactory
         return recipes;
     }
 
-    public static List<Step> ParseDetails(JSONArray detailJSON)
+    public static List<Step> GetDetails(JSONArray detailJSON)
     {
         List<Step> steps = new ArrayList<Step>();
 
         // insert ingredient as 1st step
+        String str = "{\"shortDescription\":\"Ingredients\"}";
+        Step step = new Step(str);
+        steps.add(0, step);
+
+        // insert detail steps
         for(int i=0; i<detailJSON.length(); i++)
         {
             JSONObject json = JSONHelper.parseJsonFromArray(detailJSON, i);
-            Step step = new Step(json);
-            steps.add(i, step);
+            step = new Step(json);
+            steps.add(i+1, step);
         }
         return steps;
     }

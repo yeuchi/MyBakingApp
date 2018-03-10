@@ -52,7 +52,7 @@ public class DetailActivity extends AppCompatActivity
         String str = this.getIntent().getStringExtra(Intent.EXTRA_TEXT);
         JSONObject json = JSONHelper.parseJson(str);
         Recipe recipe = new Recipe(json);
-        mSteps = RecipeFactory.ParseDetails(recipe.getSteps());
+        mSteps = RecipeFactory.GetDetails(recipe.getSteps());
 
         mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps);
         mRecipeList.setAdapter(mListAdapter);
@@ -60,8 +60,17 @@ public class DetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListItemClick(int clickItemIndex) {
+    public void onListItemClick(int clickItemIndex)
+    {
+        // ingredients
+        if(0==clickItemIndex)
+        {
 
+        }
+        else
+        {
+
+        }
     }
 
 }
