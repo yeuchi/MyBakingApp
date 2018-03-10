@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
         mRecipeList = (RecyclerView) findViewById(R.id.detail_list);
         mRecipeList.setLayoutManager(reviewManager);
-
+        mListener = this;
         parseSteps();
     }
 

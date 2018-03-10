@@ -23,7 +23,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     private int mNumberItems;
     private List<Step> mSteps;
 
-    final private StepListAdapter.ListItemClickListener mClickListener;
+    final private ListItemClickListener mClickListener;
 
     public interface ListItemClickListener
     {
@@ -31,7 +31,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     }
 
     public StepListAdapter(int numberOfItems,
-                           StepListAdapter.ListItemClickListener listener,
+                           ListItemClickListener listener,
                              List<Step> steps)
     {
         mSteps = steps;
@@ -39,8 +39,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         mClickListener = listener;
     }
     @Override
-    public StepListAdapter.ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
-                                                               int viewType)
+    public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
+                                             int viewType)
     {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.recycler_list_item;
@@ -49,7 +49,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        StepListAdapter.ItemViewHolder viewHolder = new StepListAdapter.ItemViewHolder(view);
+        ItemViewHolder viewHolder = new ItemViewHolder(view);
 
         Step step = mSteps.get(mViewHolderCount);
         String name = step.getShortDescription();

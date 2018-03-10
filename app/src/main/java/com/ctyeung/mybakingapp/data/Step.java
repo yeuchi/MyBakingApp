@@ -29,4 +29,9 @@ public class Step
     {
         return JSONHelper.parseValueByKey(json, "shortDescription");
     }
+
+    public String getJSONString()
+    {
+        return json.toString();
+    }
 }

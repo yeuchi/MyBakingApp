@@ -23,4 +23,9 @@ public class Ingredient
         this.json = json;
 
     }
+
+    public String getJSONString()
+    {
+        return json.toString();
+    }
 }

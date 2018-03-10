@@ -43,4 +43,9 @@ public class Recipe
         JSONArray array = JSONHelper.parseJsonArray(str);
         return array;
     }
+
+    public String getJSONString()
+    {
+        return json.toString();
+    }
 }
