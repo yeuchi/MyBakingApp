@@ -1,11 +1,13 @@
 package com.ctyeung.mybakingapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
+import android.widget.VideoView;
 
 import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.data.Recipe;
@@ -32,7 +34,10 @@ public class StepDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_step_detail);
 
         parseSteps();
-        loadStepDetail(1);
+        Step step = mSteps.get(1);
+
+        loadDescription(step);
+        loadVideo(step);
     }
 
     private void parseSteps()
@@ -43,9 +48,8 @@ public class StepDetailActivity extends AppCompatActivity
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
     }
 
-    private void loadStepDetail(int index)
+    private void loadDescription(Step step)
     {
-        Step step = mSteps.get(index);
         String detail = step.getDescription();
 
         if(null==detail ||
@@ -54,5 +58,17 @@ public class StepDetailActivity extends AppCompatActivity
 
         TextView textView = (TextView) this.findViewById(R.id.detail_item);
         textView.setText(detail);
+    }
+
+    private void loadVideo(Step step)
+    {
+        Uri uri = step.getVideoUri();
+
+        if(null == uri)
+            uri = step.getThumbnailUri();
+
+        VideoView videoView = (VideoView)this.findViewById(R.id.video_item);
+        videoView.setVideoURI(uri);
+        videoView.start();
     }
 }
