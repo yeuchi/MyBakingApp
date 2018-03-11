@@ -70,5 +70,4 @@ public class StepsActivity extends AppCompatActivity
         intent.putExtra(Intent.EXTRA_TEXT, str);
         startActivity(intent);
     }
-
 }

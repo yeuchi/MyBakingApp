@@ -25,6 +25,7 @@
 
         <activity android:name=".StepsActivity"></activity>
         <activity android:name=".IngredientsActivity"></activity>
+        <activity android:name=".StepDetailActivity"></activity>
     </application>
 
 </manifest>

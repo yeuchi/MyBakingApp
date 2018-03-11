@@ -80,7 +80,8 @@ import com.ctyeung.mybakingapp.R;
          */
         @Override
         public void onBindViewHolder(ItemViewHolder holder,
-                                     int position) {
+                                     int position)
+        {
             Log.d(TAG, "#" + position);
             holder.bind(position);
         }
