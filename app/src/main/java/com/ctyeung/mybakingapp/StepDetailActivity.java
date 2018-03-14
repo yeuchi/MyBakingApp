@@ -71,4 +71,11 @@ public class StepDetailActivity extends AppCompatActivity
         videoView.setVideoURI(uri);
         videoView.start();
     }
+
+    /*
+     * Add listener for left / right swipes
+     *
+     * Fragments
+     * https://stackoverflow.com/questions/19561036/adding-fragments-dynamically
+     */
 }
