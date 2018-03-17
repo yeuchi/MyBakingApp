@@ -26,6 +26,9 @@ public class StepDetailActivity extends AppCompatActivity
 {
     private List<Step> mSteps;
     private Recipe mRecipe;
+    private TextView btnLeft;
+    private TextView btnRight;
+    private int recipeStepIndex = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +37,13 @@ public class StepDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_step_detail);
 
         parseSteps();
-        Step step = mSteps.get(1);
+        buttonClickHandlers();
+        render();
+    }
 
+    private void render()
+    {
+        Step step = mSteps.get(recipeStepIndex);
         loadDescription(step);
         loadVideo(step);
     }
@@ -68,8 +76,39 @@ public class StepDetailActivity extends AppCompatActivity
             uri = step.getThumbnailUri();
 
         VideoView videoView = (VideoView)this.findViewById(R.id.video_item);
+        videoView.stopPlayback();
         videoView.setVideoURI(uri);
         videoView.start();
+    }
+
+    private void buttonClickHandlers()
+    {
+        btnLeft = (TextView) findViewById(R.id.btn_left);
+        btnLeft.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                recipeStepIndex = (recipeStepIndex > 1)?
+                                    recipeStepIndex-1:1;
+
+                render();
+            }
+        });
+
+        btnRight = (TextView) findViewById(R.id.btn_right);
+        btnRight.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                recipeStepIndex = (recipeStepIndex < mSteps.size())?
+                                    recipeStepIndex+1:
+                                    mSteps.size()-1;
+
+                render();
+            }
+        });
     }
 
     /*
