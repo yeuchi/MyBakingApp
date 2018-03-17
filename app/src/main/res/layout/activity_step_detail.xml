@@ -60,7 +60,7 @@
         android:id="@+id/directions">
 
         <TextView
-            android:id="@+id/btn_left"
+            android:id="@+id/btn_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="100dp"
@@ -69,10 +69,10 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:background="#888888"
-            android:text="Left" />
+            android:text="Previous" />
 
         <TextView
-            android:id="@+id/btn_right"
+            android:id="@+id/btn_next"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="60dp"
@@ -81,7 +81,7 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:background="#888888"
-            android:text="Right"/>
+            android:text="Next"/>
 
     </LinearLayout>
 

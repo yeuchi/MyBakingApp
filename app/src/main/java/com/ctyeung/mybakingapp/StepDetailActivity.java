@@ -26,8 +26,8 @@ public class StepDetailActivity extends AppCompatActivity
 {
     private List<Step> mSteps;
     private Recipe mRecipe;
-    private TextView btnLeft;
-    private TextView btnRight;
+    private TextView btnPrevious;
+    private TextView btnNext;
     private int recipeStepIndex = 1;
 
     @Override
@@ -83,8 +83,8 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void buttonClickHandlers()
     {
-        btnLeft = (TextView) findViewById(R.id.btn_left);
-        btnLeft.setOnClickListener(new View.OnClickListener()
+        btnPrevious = (TextView) findViewById(R.id.btn_previous);
+        btnPrevious.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -96,8 +96,8 @@ public class StepDetailActivity extends AppCompatActivity
             }
         });
 
-        btnRight = (TextView) findViewById(R.id.btn_right);
-        btnRight.setOnClickListener(new View.OnClickListener()
+        btnNext = (TextView) findViewById(R.id.btn_next);
+        btnNext.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
