@@ -40,6 +40,9 @@ public class StepsActivity extends AppCompatActivity
     private List<Step> mSteps;
     private Recipe mRecipe;
 
+    private int stepDetailIndex = 1;
+    private StepDetailFragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,12 +59,13 @@ public class StepsActivity extends AppCompatActivity
 
     private void SetFragment()
     {
-        isTwoPane = false;  // replace with checking code
+        isTwoPane = (null==findViewById(R.id.frame_step_detail))?false:true;
 
         if(isTwoPane)
         {
             // create 2nd fragment
-            StepDetailFragment fragment = new StepDetailFragment();
+            fragment = new StepDetailFragment();
+            fragment.setElements(mSteps, stepDetailIndex);
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .add(R.id.frame_step_detail, fragment)
@@ -84,6 +88,8 @@ public class StepsActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
+        stepDetailIndex = clickItemIndex;
+
         // phone mode
         if(false==isTwoPane)
         {
@@ -99,7 +105,8 @@ public class StepsActivity extends AppCompatActivity
         // tablet mode
         else
         {
-
+            // update
+            fragment.setElements(mSteps, stepDetailIndex);
         }
     }
 
