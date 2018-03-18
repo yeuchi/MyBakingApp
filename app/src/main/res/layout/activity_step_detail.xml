@@ -43,11 +43,6 @@
         android:scaleType="centerInside"
         android:id="@+id/video_frame"></FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerInside"
-        android:id="@+id/detail_frame"></FrameLayout>
     -->
 
     <LinearLayout

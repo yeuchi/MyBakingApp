@@ -1,6 +1,8 @@
 package com.ctyeung.mybakingapp;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,12 +27,16 @@ import org.json.JSONObject;
 
 public class StepsActivity extends AppCompatActivity
         implements com.ctyeung.mybakingapp.StepListAdapter.ListItemClickListener
-
 {
-    private Toast _toast;
-    private RecyclerView mRecipeList;
+    private FragmentManager fragmentManager;
+    private boolean isTwoPane = false;
+
     private StepListAdapter.ListItemClickListener mListener;
     private StepListAdapter mListAdapter;
+
+    private Toast _toast;
+    private RecyclerView mRecipeList;
+
     private List<Step> mSteps;
     private Recipe mRecipe;
 
@@ -41,10 +47,26 @@ public class StepsActivity extends AppCompatActivity
         setContentView(R.layout.activity_steps);
 
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
-        mRecipeList = (RecyclerView) findViewById(R.id.step_list);
+        mRecipeList = (RecyclerView) this.findViewById(R.id.step_list);
         mRecipeList.setLayoutManager(reviewManager);
         mListener = this;
         parseSteps();
+        SetFragment();
+    }
+
+    private void SetFragment()
+    {
+        isTwoPane = false;  // replace with checking code
+
+        if(isTwoPane)
+        {
+            // create 2nd fragment
+            StepDetailFragment fragment = new StepDetailFragment();
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.frame_step_detail, fragment)
+                    .commit();
+        }
     }
 
     private void parseSteps()
@@ -62,12 +84,23 @@ public class StepsActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
-        Intent intent = (0==clickItemIndex)?
-                    new Intent(this, IngredientsActivity.class):    // 0 index - ingredients
+        // phone mode
+        if(false==isTwoPane)
+        {
+            Intent intent = (0 == clickItemIndex) ?
+                    new Intent(this, IngredientsActivity.class) :    // 0 index - ingredients
                     new Intent(this, StepDetailActivity.class);     // all other steps
 
-        String str = mRecipe.getJSONString();
-        intent.putExtra(Intent.EXTRA_TEXT, str);
-        startActivity(intent);
+            // need to parse for mRecipe from List<Step>
+            String str = mRecipe.getJSONString();
+            intent.putExtra(Intent.EXTRA_TEXT, str);
+            startActivity(intent);
+        }
+        // tablet mode
+        else
+        {
+
+        }
     }
+
 }
