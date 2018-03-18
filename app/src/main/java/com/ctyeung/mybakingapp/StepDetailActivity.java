@@ -75,10 +75,13 @@ public class StepDetailActivity extends AppCompatActivity
         if(null == uri)
             uri = step.getThumbnailUri();
 
-        VideoView videoView = (VideoView)this.findViewById(R.id.video_item);
+        VideoView videoView = (VideoView) this.findViewById(R.id.video_item);
         videoView.stopPlayback();
-        videoView.setVideoURI(uri);
-        videoView.start();
+
+        if(null!=uri) {
+            videoView.setVideoURI(uri);
+            videoView.start();
+        }
     }
 
     private void buttonClickHandlers()

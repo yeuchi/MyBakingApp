@@ -68,6 +68,9 @@ public class StepDetailFragment extends Fragment
     {
         this.recipeStepIndex = i;
         this.mSteps = mSteps;
+
+        if(null!=rootView)
+            render();
     }
 
     public void onAttach(Context context)
