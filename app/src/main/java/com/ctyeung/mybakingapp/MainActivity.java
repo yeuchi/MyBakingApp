@@ -17,11 +17,13 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.util.Log;
+import android.content.res.Resources;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import android.widget.Toast;
+import android.util.DisplayMetrics;
 
 import com.ctyeung.mybakingapp.utility.NetworkUtils;
 import com.ctyeung.mybakingapp.data.Recipe;
@@ -43,7 +45,8 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView mRecyclerViewList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,21 +55,26 @@ public class MainActivity extends AppCompatActivity
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_display_progress);
         mNetworkErrorDisplay = (TextView) findViewById(R.id.tv_network_error_display);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
+        int columns = calNumOfColumns();
+        GridLayoutManager layoutManager = new GridLayoutManager(this, columns);
         mRecyclerViewList = (RecyclerView) findViewById(R.id.recipe_list);
         mRecyclerViewList.setLayoutManager(layoutManager);
         mListener = this;
 
         requestRecipes();
+    }
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+    protected int calNumOfColumns()
+    {
+        // check if this is a 7" or larger tablet
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        int widthPixels = metrics.widthPixels;
+        float scaleFactor = metrics.density;
+        float widthDp = widthPixels / scaleFactor;
+        int numOfColumns = (widthDp>600)?5:1;
+        return numOfColumns;
     }
 
     protected void requestRecipes()

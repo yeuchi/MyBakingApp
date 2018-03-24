@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -40,24 +41,6 @@ public class StepDetailFragment extends Fragment
     {
 
         rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
-/*
-        List<Integer> list = AndroidImageAssets.getAll();
-        GridView gridview = (GridView) rootView.findViewById(R.id.gridview);
-        MasterListAdapter adapter = new MasterListAdapter(getContext(), list);
-        gridview.setAdapter(adapter);
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            public void onItemClick(AdapterView<?> parent,
-                                    View v,
-                                    int position,
-                                    long id)
-            {
-                mCallback.onImageSelected(position);
-            }
-        });
-*/
-        //buttonClickHandlers();
         render();
 
         return rootView;
@@ -107,14 +90,27 @@ public class StepDetailFragment extends Fragment
 
     private void loadVideo(Step step)
     {
+        VideoView videoView = (VideoView) rootView.findViewById(R.id.video_item);
+        ProgressBar progressBar = (ProgressBar)rootView.findViewById(R.id.fragment_progress);
+        progressBar.setVisibility(View.INVISIBLE);
+
         Uri uri = step.getVideoUri();
 
         if(null == uri)
             uri = step.getThumbnailUri();
 
-        VideoView videoView = (VideoView)rootView.findViewById(R.id.video_item);
-        videoView.stopPlayback();
-        videoView.setVideoURI(uri);
-        videoView.start();
+        if(null == uri)
+        {
+            // show error
+            TextView textView = (TextView)rootView.findViewById(R.id.fragment_video_nada);
+            textView.setVisibility(View.VISIBLE);
+            videoView.setVisibility(View.INVISIBLE);
+            return;
+        }
+        else {
+            videoView.stopPlayback();
+            videoView.setVideoURI(uri);
+            videoView.start();
+        }
     }
 }

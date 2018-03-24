@@ -107,7 +107,6 @@ public class StepsActivity extends AppCompatActivity
         {
             // update
             fragment.setElements(mSteps, stepDetailIndex);
-            //SetFragment();
         }
     }
 
