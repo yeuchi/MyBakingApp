@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 import android.content.Intent;
 
-import com.ctyeung.mybakingapp.data.Ingredient;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.data.Recipe;
 import com.ctyeung.mybakingapp.data.Step;
@@ -28,7 +28,6 @@ import org.json.JSONObject;
 public class StepsActivity extends AppCompatActivity
         implements com.ctyeung.mybakingapp.StepListAdapter.ListItemClickListener
 {
-    private FragmentManager fragmentManager;
     private boolean isTwoPane = false;
 
     private StepListAdapter.ListItemClickListener mListener;
@@ -42,12 +41,20 @@ public class StepsActivity extends AppCompatActivity
 
     private int stepDetailIndex = 1;
     private StepDetailFragment fragment;
+    private FragmentManager fragmentManager;
+
+    private SharedPrefUtil sharedPrefUtil;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
+
+        // get last know index
+        sharedPrefUtil = new SharedPrefUtil(getApplicationContext());
+        stepDetailIndex = sharedPrefUtil.getStepSelected();
 
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
         mRecipeList = (RecyclerView) this.findViewById(R.id.step_list);
@@ -117,4 +124,10 @@ public class StepsActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        sharedPrefUtil.setStepSelected(stepDetailIndex);
+        super.onDestroy();
+    }
 }
