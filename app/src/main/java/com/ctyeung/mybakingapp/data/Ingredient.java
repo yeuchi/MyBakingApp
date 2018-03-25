@@ -8,20 +8,18 @@ import com.ctyeung.mybakingapp.utility.JSONHelper;
 
 import org.json.JSONObject;
 
-public class Ingredient
+public class Ingredient extends StepDetail
 {
-    private JSONObject json;
     private String recipe;
 
-    public Ingredient()
+    public Ingredient(String str)
     {
-
+        super(str);
     }
 
     public Ingredient(JSONObject json)
     {
-        this.json = json;
-
+        super(json);
     }
 
     public String getJSONString()

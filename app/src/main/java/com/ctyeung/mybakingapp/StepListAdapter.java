@@ -73,7 +73,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
      */
     @Override
     public void onBindViewHolder(StepListAdapter.ItemViewHolder holder,
-                                 int position) {
+                                 int position)
+    {
         Log.d(TAG, "#" + position);
         holder.bind(position);
     }

@@ -25,7 +25,7 @@ import java.util.List;
  * Created by ctyeung on 3/17/18.
  */
 
-public class StepDetailFragment extends Fragment
+public class StepDetailFragment extends BaseFragment
 {
     private View rootView;
 
@@ -46,6 +46,7 @@ public class StepDetailFragment extends Fragment
         return rootView;
     }
 
+    @Override
     public void setElements(List<Step> mSteps,
                             int i)
     {

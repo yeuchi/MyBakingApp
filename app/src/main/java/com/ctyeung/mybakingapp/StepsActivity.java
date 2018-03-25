@@ -2,7 +2,7 @@ package com.ctyeung.mybakingapp;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,7 +40,7 @@ public class StepsActivity extends AppCompatActivity
     private Recipe mRecipe;
 
     private int stepDetailIndex = 1;
-    private StepDetailFragment fragment;
+    private BaseFragment fragment=null;
     private FragmentManager fragmentManager;
 
     private SharedPrefUtil sharedPrefUtil;
@@ -70,9 +70,26 @@ public class StepsActivity extends AppCompatActivity
 
         if(isTwoPane)
         {
-            // create 2nd fragment
-            fragment = new StepDetailFragment();
-            fragment.setElements(mSteps, stepDetailIndex);
+            // remove existing fragment
+            if(fragment != null)
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .remove(fragment)
+                        .commit();
+
+            // insert fragment
+            if(0==stepDetailIndex)
+            {
+                fragment = new StepIngredientsFragment();
+                fragment.setElement(mRecipe);
+            }
+            else
+            {
+                fragment = new StepDetailFragment();
+                fragment.setElements(mSteps, stepDetailIndex);
+            }
+
+
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .add(R.id.frame_step_detail, fragment)
@@ -113,15 +130,7 @@ public class StepsActivity extends AppCompatActivity
         // tablet mode
         else
         {
-            if (stepDetailIndex==0)
-            {
-                // ??? CTY ??? show ingredients
-
-            }
-            else
-            {
-                fragment.setElements(mSteps, stepDetailIndex);
-            }
+            SetFragment();
         }
     }
 

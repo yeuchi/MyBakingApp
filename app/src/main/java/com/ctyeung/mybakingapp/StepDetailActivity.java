@@ -33,7 +33,7 @@ public class StepDetailActivity extends AppCompatActivity
 
     private int recipeStepIndex = 1;
     private FragmentManager fragmentManager;
-    private StepDetailFragment fragment;
+    private BaseFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,9 +56,25 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void SetFragment()
     {
-        // create 2nd fragment
-        fragment = new StepDetailFragment();
-        fragment.setElements(mSteps, recipeStepIndex);
+        // remove existing fragment
+        if(fragment != null)
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(fragment)
+                    .commit();
+
+        // insert fragment
+        if(0==recipeStepIndex)
+        {
+            fragment = new StepIngredientsFragment();
+            fragment.setElement(mRecipe);
+        }
+        else
+        {
+            fragment = new StepDetailFragment();
+            fragment.setElements(mSteps, recipeStepIndex);
+        }
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.frame_step_detail2, fragment)
@@ -67,18 +83,16 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void buttonClickHandlers()
     {
-        // ??? CTY ??? show ingredients
-
         btnPrevious = (TextView) findViewById(R.id.btn_previous);
         btnPrevious.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-            recipeStepIndex = (recipeStepIndex > 1)?
-                                recipeStepIndex-1:1;
+            recipeStepIndex = (recipeStepIndex > 0)?
+                                recipeStepIndex-1:0;
 
-            fragment.setElements(mSteps, recipeStepIndex);
+                SetFragment();
             }
         });
 
@@ -93,7 +107,7 @@ public class StepDetailActivity extends AppCompatActivity
                                 recipeStepIndex+1:
                                 size;
 
-            fragment.setElements(mSteps, recipeStepIndex);
+                SetFragment();
             }
         });
     }

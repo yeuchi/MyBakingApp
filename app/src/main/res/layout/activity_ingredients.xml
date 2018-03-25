@@ -4,24 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="start"
+    android:orientation="vertical"
     tools:context="com.ctyeung.mybakingapp.IngredientsActivity">
 
-    <ScrollView
-        android:id="@+id/sv_scroller"
+    <TextView
+        android:id="@+id/ingredients_error"
+        android:padding="16dp"
+        android:visibility="invisible"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp"
+        android:text="No ingredients available."/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_ingredients"></FrameLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/ingredient_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

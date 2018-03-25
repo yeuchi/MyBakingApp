@@ -1,10 +1,12 @@
 package com.ctyeung.mybakingapp;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
@@ -24,13 +26,9 @@ import org.json.JSONObject;
  */
 
 public class IngredientsActivity extends AppCompatActivity
-        implements com.ctyeung.mybakingapp.IngredientListAdapter.ListItemClickListener
-
 {
-    private RecyclerView mIngredientList;
-    private IngredientListAdapter.ListItemClickListener mListener;
-    private IngredientListAdapter mListAdapter;
-    private List<Ingredient> mIngredients;
+    private StepIngredientsFragment fragment;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,30 +36,37 @@ public class IngredientsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients);
 
-        GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
-        mIngredientList = (RecyclerView) findViewById(R.id.ingredient_list);
-        mIngredientList.setLayoutManager(reviewManager);
-        mListener = this;
-        parseIngredients();
+        Recipe recipe = parseIngredients();
+        SetFragment(recipe);
     }
 
-    private void parseIngredients()
+    private Recipe parseIngredients()
     {
         String str = this.getIntent().getStringExtra(Intent.EXTRA_TEXT);
         JSONObject json = JSONHelper.parseJson(str);
-        Recipe recipe = new Recipe(json);
-        mIngredients = RecipeFactory.IngredientsJsonArray2List(recipe.getIngredients());
-
-        IngredientListAdapter.mViewHolderCount = 0;
-        mListAdapter = new IngredientListAdapter(mIngredients.size(), mListener, mIngredients);
-        mIngredientList.setAdapter(mListAdapter);
-        mIngredientList.setHasFixedSize(true);
+        return new Recipe(json);
     }
 
-    @Override
-    public void onListItemClick(int clickItemIndex)
+    private void SetFragment(Recipe recipe)
     {
+        TextView textView = (TextView)findViewById(R.id.ingredients_error);
 
+        if(null==recipe)
+        {
+            textView.setVisibility(View.VISIBLE);
+        }
+        else {
+            textView.setVisibility(View.INVISIBLE);
+
+            // create 2nd fragment
+            fragment = new StepIngredientsFragment();
+            fragment.setElement(recipe);
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.frame_ingredients, fragment)
+                    .commit();
+        }
     }
+
 
 }

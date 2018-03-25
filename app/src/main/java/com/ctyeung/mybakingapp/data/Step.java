@@ -14,26 +14,16 @@ import org.json.JSONObject;
 
 import java.net.URL;
 
-public class Step
+public class Step extends StepDetail
 {
-    private JSONObject json;
-
     public Step(String str )
     {
-        try
-        {
-            this.json = new JSONObject(str);
-        }
-        catch(Exception ex)
-        {
-            Log.e("Step() constructor",Log.getStackTraceString(ex));
-        }
+        super(str);
     }
 
     public Step(JSONObject json)
     {
-        this.json = json;
-
+        super(json);
     }
 
     public String getShortDescription()
