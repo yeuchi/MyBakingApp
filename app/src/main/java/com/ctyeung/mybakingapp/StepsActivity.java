@@ -87,6 +87,7 @@ public class StepsActivity extends AppCompatActivity
         mRecipe = new Recipe(json);
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
 
+        StepListAdapter.mViewHolderCount = 0;
         mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps);
         mRecipeList.setAdapter(mListAdapter);
         mRecipeList.setHasFixedSize(true);

@@ -27,7 +27,7 @@ import com.ctyeung.mybakingapp.R;
     public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.ItemViewHolder>
     {
         private static final String TAG = RecipeListAdapter.class.getSimpleName();
-        private static int mViewHolderCount;
+        public static int mViewHolderCount;
         private int mNumberItems;
         private List<Recipe> mRecipes;
         private ListItemClickListener mClickListener;

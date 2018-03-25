@@ -52,6 +52,7 @@ public class IngredientsActivity extends AppCompatActivity
         Recipe recipe = new Recipe(json);
         mIngredients = RecipeFactory.IngredientsJsonArray2List(recipe.getIngredients());
 
+        IngredientListAdapter.mViewHolderCount = 0;
         mListAdapter = new IngredientListAdapter(mIngredients.size(), mListener, mIngredients);
         mIngredientList.setAdapter(mListAdapter);
         mIngredientList.setHasFixedSize(true);

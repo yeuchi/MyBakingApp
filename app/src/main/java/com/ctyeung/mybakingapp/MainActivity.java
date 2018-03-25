@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity
             if(null!=recipes &&
                     recipes.size()>0)
             {
+                RecipeListAdapter.mViewHolderCount = 0;
                 mListAdapter = new RecipeListAdapter(recipes.size(), mListener, recipes);
                 mRecyclerViewList.setAdapter(mListAdapter);
                 mRecyclerViewList.setHasFixedSize(true);

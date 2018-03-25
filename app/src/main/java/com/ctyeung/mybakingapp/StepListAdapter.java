@@ -19,7 +19,7 @@ import java.util.List;
 public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemViewHolder>
 {
     private static final String TAG = StepListAdapter.class.getSimpleName();
-    private static int mViewHolderCount;
+    public static int mViewHolderCount;
     private int mNumberItems;
     private List<Step> mSteps;
 

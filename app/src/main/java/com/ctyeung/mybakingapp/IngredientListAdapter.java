@@ -20,7 +20,7 @@ import java.util.List;
 public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAdapter.ItemViewHolder>
 {
     private static final String TAG = IngredientListAdapter.class.getSimpleName();
-    private static int mViewHolderCount;
+    public static int mViewHolderCount;
     private int mNumberItems;
     private List<Ingredient> mIngredients;
 
