@@ -105,8 +105,15 @@ public class StepsActivity extends AppCompatActivity
         // tablet mode
         else
         {
-            // update
-            fragment.setElements(mSteps, stepDetailIndex);
+            if (stepDetailIndex==0)
+            {
+                // ??? CTY ??? show ingredients
+
+            }
+            else
+            {
+                fragment.setElements(mSteps, stepDetailIndex);
+            }
         }
     }
 

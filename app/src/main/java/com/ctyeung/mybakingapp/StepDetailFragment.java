@@ -78,36 +78,46 @@ public class StepDetailFragment extends Fragment
 
     private void loadDescription(Step step)
     {
-        String detail = step.getDescription();
+        String desc = step.getDescription();
+        String shortDesc = step.getShortDescription();
 
-        if(null==detail ||
-                0==detail.length())
-            detail = step.getShortDescription();
+        String str = "no description available.";
+
+        if(null!=desc && desc.length()>0)
+            str = desc;
+
+        else if (null!=desc && desc.length()>0)
+            str = desc;
 
         TextView textView = (TextView) rootView.findViewById(R.id.detail_item);
-        textView.setText(detail);
+        textView.setText(str);
     }
 
     private void loadVideo(Step step)
     {
+        TextView textView = (TextView)rootView.findViewById(R.id.fragment_video_nada);
         VideoView videoView = (VideoView) rootView.findViewById(R.id.video_item);
         ProgressBar progressBar = (ProgressBar)rootView.findViewById(R.id.fragment_progress);
         progressBar.setVisibility(View.INVISIBLE);
 
-        Uri uri = step.getVideoUri();
+        Uri videoUri = step.getVideoUri();
+        Uri thumbnailUri = step.getThumbnailUri();
 
-        if(null == uri)
-            uri = step.getThumbnailUri();
-
-        if(null == uri)
+        if(null == videoUri &&
+                null == thumbnailUri)
         {
             // show error
-            TextView textView = (TextView)rootView.findViewById(R.id.fragment_video_nada);
             textView.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.INVISIBLE);
             return;
         }
         else {
+            Uri uri = (null==videoUri)?
+                        thumbnailUri:
+                        videoUri;
+
+            textView.setVisibility(View.INVISIBLE);
+            videoView.setVisibility(View.VISIBLE);
             videoView.stopPlayback();
             videoView.setVideoURI(uri);
             videoView.start();

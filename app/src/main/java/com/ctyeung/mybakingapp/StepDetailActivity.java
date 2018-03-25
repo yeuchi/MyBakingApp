@@ -2,6 +2,7 @@ package com.ctyeung.mybakingapp;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -26,9 +27,13 @@ public class StepDetailActivity extends AppCompatActivity
 {
     private List<Step> mSteps;
     private Recipe mRecipe;
+
     private TextView btnPrevious;
     private TextView btnNext;
+
     private int recipeStepIndex = 1;
+    private FragmentManager fragmentManager;
+    private StepDetailFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,15 +42,8 @@ public class StepDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_step_detail);
 
         parseSteps();
+        SetFragment();
         buttonClickHandlers();
-        render();
-    }
-
-    private void render()
-    {
-        Step step = mSteps.get(recipeStepIndex);
-        loadDescription(step);
-        loadVideo(step);
     }
 
     private void parseSteps()
@@ -56,46 +54,31 @@ public class StepDetailActivity extends AppCompatActivity
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
     }
 
-    private void loadDescription(Step step)
+    private void SetFragment()
     {
-        String detail = step.getDescription();
-
-        if(null==detail ||
-                0==detail.length())
-            detail = step.getShortDescription();
-
-        TextView textView = (TextView) this.findViewById(R.id.detail_item);
-        textView.setText(detail);
-    }
-
-    private void loadVideo(Step step)
-    {
-        Uri uri = step.getVideoUri();
-
-        if(null == uri)
-            uri = step.getThumbnailUri();
-
-        VideoView videoView = (VideoView) this.findViewById(R.id.video_item);
-        videoView.stopPlayback();
-
-        if(null!=uri) {
-            videoView.setVideoURI(uri);
-            videoView.start();
-        }
+        // create 2nd fragment
+        fragment = new StepDetailFragment();
+        fragment.setElements(mSteps, recipeStepIndex);
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.frame_step_detail2, fragment)
+                .commit();
     }
 
     private void buttonClickHandlers()
     {
+        // ??? CTY ??? show ingredients
+
         btnPrevious = (TextView) findViewById(R.id.btn_previous);
         btnPrevious.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                recipeStepIndex = (recipeStepIndex > 1)?
-                                    recipeStepIndex-1:1;
+            recipeStepIndex = (recipeStepIndex > 1)?
+                                recipeStepIndex-1:1;
 
-                render();
+            fragment.setElements(mSteps, recipeStepIndex);
             }
         });
 
@@ -105,21 +88,13 @@ public class StepDetailActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                recipeStepIndex = (recipeStepIndex < mSteps.size())?
-                                    recipeStepIndex+1:
-                                    mSteps.size()-1;
+                int size = mSteps.size()-1;
+                recipeStepIndex = (recipeStepIndex < size)?
+                                recipeStepIndex+1:
+                                size;
 
-                render();
+            fragment.setElements(mSteps, recipeStepIndex);
             }
         });
-
-        // ??? cty ??? need to handle ingredient list
     }
-
-    /*
-     * Add listener for left / right swipes
-     *
-     * Fragments
-     * https://stackoverflow.com/questions/19561036/adding-fragments-dynamically
-     */
 }
