@@ -4,6 +4,7 @@ package com.ctyeung.mybakingapp;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -118,8 +120,8 @@ import com.ctyeung.mybakingapp.R;
             @Override
             public void onClick(View view)
             {
-                int clickPosition = getAdapterPosition();
-                mClickListener.onListItemClick(clickPosition);
+                int clicked_index = getAdapterPosition();
+                mClickListener.onListItemClick(clicked_index);
             }
         }
     }

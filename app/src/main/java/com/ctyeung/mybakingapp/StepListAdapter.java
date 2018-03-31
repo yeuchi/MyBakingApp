@@ -1,6 +1,8 @@
 package com.ctyeung.mybakingapp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
+import com.ctyeung.mybakingapp.StepListAdapter.ItemViewHolder;
 import com.ctyeung.mybakingapp.data.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +27,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     public static int mViewHolderCount;
     private int mNumberItems;
     private List<Step> mSteps;
+    private List<ItemViewHolder> holders;
+    private int selected_position = 0;
 
     final private ListItemClickListener mClickListener;
 
@@ -32,11 +39,14 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 
     public StepListAdapter(int numberOfItems,
                            ListItemClickListener listener,
-                             List<Step> steps)
+                           List<Step> steps,
+                           int init_selected_postion)
     {
         mSteps = steps;
         mNumberItems = numberOfItems;
         mClickListener = listener;
+        selected_position = init_selected_postion;
+        holders = new ArrayList<ItemViewHolder>();
     }
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
@@ -50,6 +60,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         ItemViewHolder viewHolder = new ItemViewHolder(view);
+        holders.add(viewHolder);
 
         Step step = mSteps.get(mViewHolderCount);
         String name = step.getShortDescription();
@@ -77,6 +88,23 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     {
         Log.d(TAG, "#" + position);
         holder.bind(position);
+        updateSelected(selected_position);
+    }
+
+    public void updateSelected(int index)
+    {
+        ItemViewHolder holder;
+
+        if(selected_position < holders.size()) {
+            holder = (ItemViewHolder) holders.get(selected_position);
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
+
+        if(index < holders.size()) {
+            holder = (ItemViewHolder) holders.get(index);
+            holder.itemView.setBackgroundColor(Color.GREEN);
+            selected_position = index;
+        }
     }
 
     @Override
@@ -111,8 +139,9 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         @Override
         public void onClick(View view)
         {
-            int clickPosition = getAdapterPosition();
-            mClickListener.onListItemClick(clickPosition);
+            int clicked_index = getAdapterPosition();
+            updateSelected(clicked_index);
+            mClickListener.onListItemClick(clicked_index);
         }
     }
 }

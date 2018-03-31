@@ -1,6 +1,7 @@
 package com.ctyeung.mybakingapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.ctyeung.mybakingapp.data.Ingredient;
 import com.ctyeung.mybakingapp.data.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     public static int mViewHolderCount;
     private int mNumberItems;
     private List<Ingredient> mIngredients;
+    private List<ItemViewHolder> holders;
+    private int selected_position = 0;
 
     final private ListItemClickListener mClickListener;
 
@@ -38,6 +42,8 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         mIngredients = ingredients;
         mNumberItems = numberOfItems;
         mClickListener = listener;
+        holders = new ArrayList<ItemViewHolder>();
+
     }
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
@@ -51,6 +57,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         ItemViewHolder viewHolder = new ItemViewHolder(view);
+        holders.add(viewHolder);
 
         Ingredient ingredient = mIngredients.get(mViewHolderCount);
         String quantity = ingredient.getQuantity();
@@ -83,6 +90,17 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
                                  int position) {
         Log.d(TAG, "#" + position);
         holder.bind(position);
+        updateSelected(0);
+    }
+
+    public void updateSelected(int index)
+    {
+        ItemViewHolder holder = (ItemViewHolder)holders.get(selected_position);
+        holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+
+        holder = (ItemViewHolder)holders.get(index);
+        holder.itemView.setBackgroundColor(Color.GREEN);
+        selected_position = index;
     }
 
     @Override
@@ -120,6 +138,9 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         @Override
         public void onClick(View view)
         {
+            int clicked_index = getAdapterPosition();
+            updateSelected(clicked_index);
+            mClickListener.onListItemClick(clicked_index);
         }
     }
 }

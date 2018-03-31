@@ -15,10 +15,7 @@ import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.data.Recipe;
 import com.ctyeung.mybakingapp.data.Step;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
-import com.ctyeung.mybakingapp.RecipeListAdapter;
 import java.util.List;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -39,7 +36,7 @@ public class StepsActivity extends AppCompatActivity
     private List<Step> mSteps;
     private Recipe mRecipe;
 
-    private int stepDetailIndex = 1;
+    private int stepDetailIndex = 0;
     private BaseFragment fragment=null;
     private FragmentManager fragmentManager;
 
@@ -89,7 +86,6 @@ public class StepsActivity extends AppCompatActivity
                 fragment.setElements(mSteps, stepDetailIndex);
             }
 
-
             fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .add(R.id.frame_step_detail, fragment)
@@ -105,7 +101,7 @@ public class StepsActivity extends AppCompatActivity
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
 
         StepListAdapter.mViewHolderCount = 0;
-        mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps);
+        mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps, stepDetailIndex);
         mRecipeList.setAdapter(mListAdapter);
         mRecipeList.setHasFixedSize(true);
     }
