@@ -95,16 +95,19 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     {
         ItemViewHolder holder;
 
-        if(selected_position < holders.size()) {
+        if(selected_position < holders.size())
+        {
             holder = (ItemViewHolder) holders.get(selected_position);
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        if(index < holders.size()) {
+        if(index < holders.size())
+        {
             holder = (ItemViewHolder) holders.get(index);
             holder.itemView.setBackgroundColor(Color.GREEN);
-            selected_position = index;
         }
+        selected_position = index;
+
     }
 
     @Override

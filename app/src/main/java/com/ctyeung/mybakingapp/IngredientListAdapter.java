@@ -87,19 +87,35 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
      */
     @Override
     public void onBindViewHolder(IngredientListAdapter.ItemViewHolder holder,
-                                 int position) {
+                                 final int position)
+    {
         Log.d(TAG, "#" + position);
         holder.bind(position);
         updateSelected(0);
+
+        holder.itemView.setOnClickListener (new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int clicked_index = position;
+                updateSelected(clicked_index);
+            }
+        });
     }
 
     public void updateSelected(int index)
     {
-        ItemViewHolder holder = (ItemViewHolder)holders.get(selected_position);
-        holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        ItemViewHolder holder;
+        if(selected_position < holders.size())
+        {
+            holder = (ItemViewHolder) holders.get(selected_position);
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
 
-        holder = (ItemViewHolder)holders.get(index);
-        holder.itemView.setBackgroundColor(Color.GREEN);
+        if(index < holders.size())
+        {
+            holder = (ItemViewHolder) holders.get(index);
+            holder.itemView.setBackgroundColor(Color.GREEN);
+        }
         selected_position = index;
     }
 
@@ -131,16 +147,11 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
          */
         void bind(int listIndex)
         {
-
-            //viewHolderName.setText(String.valueOf(listIndex));
         }
 
         @Override
         public void onClick(View view)
         {
-            int clicked_index = getAdapterPosition();
-            updateSelected(clicked_index);
-            mClickListener.onListItemClick(clicked_index);
         }
     }
 }
