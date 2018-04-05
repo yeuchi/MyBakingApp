@@ -19,6 +19,11 @@ android {
 }
 
 dependencies {
+    //compile 'com.google.android.exoplayer:exoplayer:r2.5.4'
+
+    // full exoplayer library
+    compile 'com.google.android.exoplayer:exoplayer:r2.5.2'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
