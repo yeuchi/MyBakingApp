@@ -94,9 +94,9 @@ import com.ctyeung.mybakingapp.R;
             return mNumberItems;
         }
 
-        class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+        public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
         {
-            TextView button;
+            public TextView button;
 
             public ItemViewHolder(View itemView)
             {
@@ -105,6 +105,7 @@ import com.ctyeung.mybakingapp.R;
                 button = (TextView) itemView.findViewById(R.id.recipe_item);
                 button.setOnClickListener(this);
             }
+
 
             /**
              * A method we wrote for convenience. This method will take an integer as input and
