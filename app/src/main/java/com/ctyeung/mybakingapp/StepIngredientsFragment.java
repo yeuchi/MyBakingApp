@@ -45,7 +45,7 @@ public class StepIngredientsFragment extends BaseFragment
         mIngredientList.setLayoutManager(reviewManager);
         mListener = this;
 
-        mListAdapter = new IngredientListAdapter(mIngredients.size(), mListener, mIngredients);
+        mListAdapter = new IngredientListAdapter(mListener, mIngredients);
         mIngredientList.setAdapter(mListAdapter);
         mIngredientList.setHasFixedSize(true);
 

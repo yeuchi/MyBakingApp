@@ -101,7 +101,7 @@ public class StepsActivity extends AppCompatActivity
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
 
         StepListAdapter.mViewHolderCount = 0;
-        mListAdapter = new StepListAdapter(mSteps.size(), mListener, mSteps, stepDetailIndex);
+        mListAdapter = new StepListAdapter(mListener, mSteps, stepDetailIndex);
         mRecipeList.setAdapter(mListAdapter);
         mRecipeList.setHasFixedSize(true);
     }

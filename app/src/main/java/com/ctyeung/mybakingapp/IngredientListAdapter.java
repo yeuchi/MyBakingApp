@@ -23,10 +23,10 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 {
     private static final String TAG = IngredientListAdapter.class.getSimpleName();
     public static int mViewHolderCount;
-    private int mNumberItems;
+    private static List<ItemViewHolder> holders;
     private List<Ingredient> mIngredients;
-    private List<ItemViewHolder> holders;
     private int selected_position = 0;
+    private ItemViewHolder holder;
 
     final private ListItemClickListener mClickListener;
 
@@ -35,12 +35,10 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         void onListItemClick(int clickItemIndex);
     }
 
-    public IngredientListAdapter(int numberOfItems,
-                                ListItemClickListener listener,
+    public IngredientListAdapter(ListItemClickListener listener,
                                 List<Ingredient> ingredients)
     {
         mIngredients = ingredients;
-        mNumberItems = numberOfItems;
         mClickListener = listener;
         holders = new ArrayList<ItemViewHolder>();
 
@@ -56,23 +54,23 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        ItemViewHolder viewHolder = new ItemViewHolder(view);
-        holders.add(viewHolder);
+        holder = new ItemViewHolder(view);
+        holders.add(holder);
 
         Ingredient ingredient = mIngredients.get(mViewHolderCount);
         String quantity = ingredient.getQuantity();
-        viewHolder.textViewQuantity.setText("Quantity: "+quantity);
+        holder.textViewQuantity.setText("Quantity: "+quantity);
 
         String measure = ingredient.getMeasure();
-        viewHolder.textViewMeasure.setText("Measure: "+measure);
+        holder.textViewMeasure.setText("Measure: "+measure);
 
         String stuff = ingredient.getIngredient();
-        viewHolder.textViewIngredient.setText("Ingredient: "+stuff);
+        holder.textViewIngredient.setText("Ingredient: "+stuff);
 
         Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: " + mViewHolderCount);
 
         mViewHolderCount++;
-        return viewHolder;
+        return holder;
     }
 
     /**
@@ -122,7 +120,9 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     @Override
     public int getItemCount()
     {
-        return mNumberItems;
+        return (null==holders)?
+                0:
+                holders.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener

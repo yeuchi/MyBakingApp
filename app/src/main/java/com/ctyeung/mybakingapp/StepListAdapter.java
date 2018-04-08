@@ -25,9 +25,10 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 {
     private static final String TAG = StepListAdapter.class.getSimpleName();
     public static int mViewHolderCount;
-    private int mNumberItems;
+    private static List<ItemViewHolder> holders;
+
+    private ItemViewHolder viewHolder;
     private List<Step> mSteps;
-    private List<ItemViewHolder> holders;
     private int selected_position = 0;
 
     final private ListItemClickListener mClickListener;
@@ -37,17 +38,18 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         void onListItemClick(int clickItemIndex);
     }
 
-    public StepListAdapter(int numberOfItems,
-                           ListItemClickListener listener,
+    public StepListAdapter(ListItemClickListener listener,
                            List<Step> steps,
                            int init_selected_postion)
     {
         mSteps = steps;
-        mNumberItems = numberOfItems;
         mClickListener = listener;
         selected_position = init_selected_postion;
-        holders = new ArrayList<ItemViewHolder>();
+
+        if(null==holders)
+            holders = new ArrayList<ItemViewHolder>();
     }
+
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
                                              int viewType)
@@ -59,7 +61,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        ItemViewHolder viewHolder = new ItemViewHolder(view);
+        viewHolder = new ItemViewHolder(view);
         holders.add(viewHolder);
 
         Step step = mSteps.get(mViewHolderCount);
@@ -113,7 +115,9 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     @Override
     public int getItemCount()
     {
-        return mNumberItems;
+        return (null==holders)?
+                0:
+                holders.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
