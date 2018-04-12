@@ -4,9 +4,11 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
+import android.content.SharedPreferences;
 
 import android.content.Intent;
 import android.net.Uri;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 
 /**
  * Implementation of App Widget functionality.
@@ -15,12 +17,13 @@ public class HomeScreenWidget extends AppWidgetProvider {
 
     private void updateAppWidget(Context context,
                                  AppWidgetManager appWidgetManager,
-                                 int appWidgetId) {
+                                 int appWidgetId,
+                                 String str) {
 
         // Construct the RemoteViews object
-        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.home_screen_widget);
-        RemoteViews views = updateWidgetListView(context, appWidgetId);
-        //views.setTextViewText(R.id.appwidget_text, R.string.appwidget_text);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.home_screen_widget);
+        //RemoteViews views = updateWidgetListView(context, appWidgetId);
+        views.setTextViewText(R.id.appwidget_text, str);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -52,9 +55,12 @@ public class HomeScreenWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-        }
+        //for (int appWidgetId : appWidgetIds) {
+
+            SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(context);
+            String str = sharedPrefUtil.getIngredients();
+            updateAppWidget(context, appWidgetManager, appWidgetIds[0], str);
+        //}
     }
 
     @Override

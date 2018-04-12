@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MyBakingApp</string>
     <string name="action_settings">Settings</string>
-    <string name="appwidget_text">Widget_text</string>
+    <string name="appwidget_text">Line 1 \n line 2 \n line 3 \n line 4</string>
     <string name="add_widget">Add widget</string>
 </resources>

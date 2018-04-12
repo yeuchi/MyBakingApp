@@ -56,7 +56,7 @@ public class ListProvider implements RemoteViewsFactory {
 
     @Override
     public int getViewTypeCount() {
-        return 1;
+        return 2;
     }
 
     @Override

@@ -13,6 +13,7 @@ public class SharedPrefUtil {
 
     public static final String mypreference = "mypref";
     public static final String STEP_SELECTED = "step";
+    public static final String INGREDIENTS_SELECTED = "ingredients";
 
     private Context context;
 
@@ -31,6 +32,18 @@ public class SharedPrefUtil {
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(STEP_SELECTED, index);
+        editor.commit();
+    }
+
+    public String getIngredients()
+    {
+        return sharedPreferences.getString(INGREDIENTS_SELECTED, "not available");
+    }
+
+    public void setIngredients(String str)
+    {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(INGREDIENTS_SELECTED, str);
         editor.commit();
     }
 }

@@ -29,7 +29,7 @@ import com.ctyeung.mybakingapp.utility.NetworkUtils;
 import com.ctyeung.mybakingapp.data.Recipe;
 import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
-import com.ctyeung.mybakingapp.RecipeListAdapter;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private TextView mNetworkErrorDisplay;
     private RecipeListAdapter mListAdapter;
     private RecyclerView mRecyclerViewList;
+    private SharedPrefUtil sharedPrefUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
+        sharedPrefUtil = new SharedPrefUtil(this);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_display_progress);
         mNetworkErrorDisplay = (TextView) findViewById(R.id.tv_network_error_display);
 
@@ -150,6 +152,8 @@ public class MainActivity extends AppCompatActivity
             mToast.cancel();
 
         Recipe selectedRecipe = recipes.get(clickItemIndex);
+        //JSONArray jsonArray = selectedRecipe.getIngredients();
+        //sharedPrefUtil.setIngredients(jsonArray.toString());
 
         // load detail page
         Intent intent = new Intent(this, StepsActivity.class);

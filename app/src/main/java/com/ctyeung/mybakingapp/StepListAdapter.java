@@ -27,7 +27,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     public static int mViewHolderCount;
     private static List<ItemViewHolder> holders;
 
-    private ItemViewHolder viewHolder;
+    private ItemViewHolder viewHolder = null;
     private List<Step> mSteps;
     private int selected_position = 0;
 
@@ -61,6 +61,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+
         viewHolder = new ItemViewHolder(view);
         holders.add(viewHolder);
 
