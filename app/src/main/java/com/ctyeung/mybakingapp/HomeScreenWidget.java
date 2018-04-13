@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.TextView;
+
 import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 
 /**
@@ -29,8 +31,8 @@ public class HomeScreenWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    private RemoteViews updateWidgetListView(Context context,
-                                             int appWidgetId) {
+    /*private RemoteViews updateWidgetListView(Context context,
+    //                                         int appWidgetId) {
 
         //which layout to show on widget
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
@@ -44,13 +46,13 @@ public class HomeScreenWidget extends AppWidgetProvider {
         //don't know its purpose to me right now
         svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
         //setting adapter to listview of the widget
-        remoteViews.setRemoteAdapter(appWidgetId,
-                                    R.id.listViewWidget,
-                                    svcIntent);
+        //remoteViews.setRemoteAdapter(appWidgetId,
+        //                            R.id.listViewWidget,
+        //                            svcIntent);
         //setting an empty view in case of no data
         //remoteViews.setEmptyView(R.id.listViewWidget, R.id.empty_view);
         return remoteViews;
-    }
+    }*/
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -59,7 +61,11 @@ public class HomeScreenWidget extends AppWidgetProvider {
 
             SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(context);
             String str = sharedPrefUtil.getIngredients();
-            updateAppWidget(context, appWidgetManager, appWidgetIds[0], str);
+
+        String filterLine = str.replace(",", "\n");
+        String filterEnd = filterLine.replace("}", "\n");
+        String filterStarter = filterEnd.replaceAll("[^a-zA-Z0-9\n: ]","");
+        updateAppWidget(context, appWidgetManager, appWidgetIds[0], filterStarter);
         //}
     }
 
