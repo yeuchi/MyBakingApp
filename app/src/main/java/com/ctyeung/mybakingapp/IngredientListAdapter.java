@@ -40,7 +40,9 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     {
         mIngredients = ingredients;
         mClickListener = listener;
-        holders = new ArrayList<ItemViewHolder>();
+
+        if(null==holders)
+            holders = new ArrayList<ItemViewHolder>();
 
     }
     @Override
@@ -120,9 +122,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     @Override
     public int getItemCount()
     {
-        return (null==holders)?
-                0:
-                holders.size();
+        return (null==mIngredients)?0:mIngredients.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener

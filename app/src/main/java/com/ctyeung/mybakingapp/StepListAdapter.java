@@ -26,7 +26,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     private static final String TAG = StepListAdapter.class.getSimpleName();
     public static int mViewHolderCount;
     private static List<ItemViewHolder> holders;
-
+    private static int mNumberItems;
     private ItemViewHolder viewHolder = null;
     private List<Step> mSteps;
     private int selected_position = 0;
@@ -42,6 +42,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
                            List<Step> steps,
                            int init_selected_postion)
     {
+        mNumberItems = steps.size();
         mSteps = steps;
         mClickListener = listener;
         selected_position = init_selected_postion;
@@ -116,9 +117,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     @Override
     public int getItemCount()
     {
-        return (null==holders)?
-                0:
-                holders.size();
+        return mNumberItems;
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
