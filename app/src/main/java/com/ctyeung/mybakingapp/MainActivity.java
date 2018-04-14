@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity
             mToast.cancel();
 
         Recipe selectedRecipe = recipes.get(clickItemIndex);
-        //JSONArray jsonArray = selectedRecipe.getIngredients();
-        //sharedPrefUtil.setIngredients(jsonArray.toString());
+        JSONArray jsonArray = selectedRecipe.getIngredients();
+        sharedPrefUtil.setIngredients(jsonArray.toString());
 
         // load detail page
         Intent intent = new Intent(this, StepsActivity.class);
