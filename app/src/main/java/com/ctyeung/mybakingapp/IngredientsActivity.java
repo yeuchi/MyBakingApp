@@ -27,8 +27,8 @@ import org.json.JSONObject;
 
 public class IngredientsActivity extends AppCompatActivity
 {
-    private StepIngredientsFragment fragment;
-    private FragmentManager fragmentManager;
+    private StepIngredientsFragment mFragment;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,11 +59,11 @@ public class IngredientsActivity extends AppCompatActivity
             textView.setVisibility(View.INVISIBLE);
 
             // create 2nd fragment
-            fragment = new StepIngredientsFragment();
-            fragment.setElement(recipe);
-            fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.frame_ingredients, fragment)
+            mFragment = new StepIngredientsFragment();
+            mFragment.setElement(recipe);
+            mFragmentManager = getSupportFragmentManager();
+            mFragmentManager.beginTransaction()
+                    .add(R.id.frame_ingredients, mFragment)
                     .commit();
         }
     }

@@ -10,8 +10,6 @@ import org.json.JSONObject;
 
 public class Ingredient extends StepDetail
 {
-    private String recipe;
-
     public Ingredient(String str)
     {
         super(str);
@@ -24,21 +22,21 @@ public class Ingredient extends StepDetail
 
     public String getJSONString()
     {
-        return json.toString();
+        return mJson.toString();
     }
 
     public String getQuantity()
     {
-        return JSONHelper.parseValueByKey(json, "quantity");
+        return JSONHelper.parseValueByKey(mJson, "quantity");
     }
 
     public String getMeasure()
     {
-        return JSONHelper.parseValueByKey(json, "measure");
+        return JSONHelper.parseValueByKey(mJson, "measure");
     }
 
     public String getIngredient()
     {
-        return JSONHelper.parseValueByKey(json, "ingredient");
+        return JSONHelper.parseValueByKey(mJson, "ingredient");
     }
 }

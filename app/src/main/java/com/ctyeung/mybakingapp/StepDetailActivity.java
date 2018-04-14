@@ -28,12 +28,12 @@ public class StepDetailActivity extends AppCompatActivity
     private List<Step> mSteps;
     private Recipe mRecipe;
 
-    private TextView btnPrevious;
-    private TextView btnNext;
+    private int mRecipeStepIndex = 1;
+    private BaseFragment mFragment;
+    private FragmentManager mFragmentManager;
 
-    private int recipeStepIndex = 1;
-    private FragmentManager fragmentManager;
-    private BaseFragment fragment;
+    private TextView mBtnNext;
+    private TextView mBtnPrevious;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,6 +48,10 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void parseSteps()
     {
+        // step index
+        mRecipeStepIndex = this.getIntent().getIntExtra(Intent.EXTRA_INDEX, 1);
+
+        // recipe
         String str = this.getIntent().getStringExtra(Intent.EXTRA_TEXT);
         JSONObject json = JSONHelper.parseJson(str);
         mRecipe = new Recipe(json);
@@ -57,55 +61,55 @@ public class StepDetailActivity extends AppCompatActivity
     private void SetFragment()
     {
         // remove existing fragment
-        if(fragment != null)
+        if(mFragment != null)
             getSupportFragmentManager()
                     .beginTransaction()
-                    .remove(fragment)
+                    .remove(mFragment)
                     .commit();
 
         // insert fragment
-        if(0==recipeStepIndex)
+        if(0==mRecipeStepIndex)
         {
-            fragment = new StepIngredientsFragment();
-            fragment.setElement(mRecipe);
+            mFragment = new StepIngredientsFragment();
+            mFragment.setElement(mRecipe);
         }
         else
         {
-            fragment = new StepDetailFragment();
-            fragment.setElements(mSteps, recipeStepIndex);
+            mFragment = new StepDetailFragment();
+            mFragment.setElements(mSteps, mRecipeStepIndex);
         }
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.frame_step_detail2, fragment)
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
+                .add(R.id.frame_step_detail2, mFragment)
                 .commit();
     }
 
     private void buttonClickHandlers()
     {
-        btnPrevious = (TextView) findViewById(R.id.btn_previous);
-        btnPrevious.setOnClickListener(new View.OnClickListener()
+        mBtnPrevious = (TextView) findViewById(R.id.btn_previous);
+        mBtnPrevious.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-            recipeStepIndex = (recipeStepIndex > 0)?
-                                recipeStepIndex-1:0;
+                mRecipeStepIndex = (mRecipeStepIndex > 0)?
+                                    mRecipeStepIndex-1:0;
 
                 SetFragment();
             }
         });
 
-        btnNext = (TextView) findViewById(R.id.btn_next);
-        btnNext.setOnClickListener(new View.OnClickListener()
+        mBtnNext = (TextView) findViewById(R.id.btn_next);
+        mBtnNext.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 int size = mSteps.size()-1;
-                recipeStepIndex = (recipeStepIndex < size)?
-                                recipeStepIndex+1:
-                                size;
+                mRecipeStepIndex = (mRecipeStepIndex < size)?
+                                    mRecipeStepIndex+1:
+                                    size;
 
                 SetFragment();
             }

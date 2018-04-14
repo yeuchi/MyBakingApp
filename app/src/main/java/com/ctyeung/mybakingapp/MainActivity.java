@@ -36,14 +36,13 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity
         implements RecipeListAdapter.ListItemClickListener {
 
-    private Toast mToast;
-    private List<Recipe> recipes;
+    private List<Recipe> mRecipes;
     private ProgressBar mLoadingIndicator;
     private RecipeListAdapter.ListItemClickListener mListener;
     private TextView mNetworkErrorDisplay;
     private RecipeListAdapter mListAdapter;
     private RecyclerView mRecyclerViewList;
-    private SharedPrefUtil sharedPrefUtil;
+    private SharedPrefUtil mSharedPrefUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        sharedPrefUtil = new SharedPrefUtil(this);
+        mSharedPrefUtil = new SharedPrefUtil(this);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_display_progress);
         mNetworkErrorDisplay = (TextView) findViewById(R.id.tv_network_error_display);
 
@@ -131,13 +130,13 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
 
-            recipes = RecipeFactory.Create(jsonArray);
+            mRecipes = RecipeFactory.Create(jsonArray);
 
-            if(null!=recipes &&
-                    recipes.size()>0)
+            if(null!=mRecipes &&
+                    mRecipes.size()>0)
             {
                 RecipeListAdapter.mViewHolderCount = 0;
-                mListAdapter = new RecipeListAdapter(recipes.size(), mListener, recipes);
+                mListAdapter = new RecipeListAdapter(mRecipes.size(), mListener, mRecipes);
                 mRecyclerViewList.setAdapter(mListAdapter);
                 mRecyclerViewList.setHasFixedSize(true);
                 return;
@@ -148,12 +147,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
-        if(mToast!=null)
-            mToast.cancel();
-
-        Recipe selectedRecipe = recipes.get(clickItemIndex);
+        Recipe selectedRecipe = mRecipes.get(clickItemIndex);
         JSONArray jsonArray = selectedRecipe.getIngredients();
-        sharedPrefUtil.setIngredients(jsonArray.toString());
+        mSharedPrefUtil.setIngredients(jsonArray.toString());
 
         // load detail page
         Intent intent = new Intent(this, StepsActivity.class);

@@ -28,12 +28,12 @@ public class Step extends StepDetail
 
     public String getShortDescription()
     {
-        return JSONHelper.parseValueByKey(json, "shortDescription");
+        return JSONHelper.parseValueByKey(mJson, "shortDescription");
     }
 
     public String getDescription()
     {
-        return JSONHelper.parseValueByKey(json, "description");
+        return JSONHelper.parseValueByKey(mJson, "description");
     }
 
     public Uri getVideoUri()
@@ -48,7 +48,7 @@ public class Step extends StepDetail
 
     private Uri parseUri(String key)
     {
-        String str = JSONHelper.parseValueByKey(json, key);
+        String str = JSONHelper.parseValueByKey(mJson, key);
         Uri uri = (null==str || 0==str.length())?
                     null:
                     Uri.parse(str);
@@ -58,6 +58,6 @@ public class Step extends StepDetail
 
     public String getJSONString()
     {
-        return json.toString();
+        return mJson.toString();
     }
 }

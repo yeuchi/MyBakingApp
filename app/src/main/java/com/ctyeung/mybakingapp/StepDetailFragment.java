@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.ctyeung.mybakingapp.data.Recipe;
@@ -62,55 +63,50 @@ import android.content.Context;
 public class StepDetailFragment extends BaseFragment
 {
     // exo-player
-    private SimpleExoPlayerView simpleExoPlayerView;
-    private SimpleExoPlayer player;
+    private SimpleExoPlayerView mSimpleExoPlayerView;
+    private SimpleExoPlayer mPlayer;
 
-    private Timeline.Window window;
-    private DataSource.Factory mediaDataSourceFactory;
-    private DefaultTrackSelector trackSelector;
-    private boolean shouldAutoPlay;
-    private BandwidthMeter bandwidthMeter;
-
-    private ImageView ivHideControllerButton;
-    private Context context;
-    private Uri uri;
+    private Timeline.Window mWindow;
+    private DataSource.Factory mMediaDataSourceFactory;
+    private DefaultTrackSelector mTrackSelector;
+    private boolean mShouldAutoPlay;
+    private BandwidthMeter mBandwidthMeter;
+    private Context mContext;
+    private Uri mUri;
 
     ////////////////////////////////////////////////////////////////
 
-    private View rootView;
+    private View mRootView;
 
     private List<Step> mSteps;
-    private TextView btnPrevious;
-    private TextView btnNext;
-    private int recipeStepIndex = 1;
+    private int mRecipeStepIndex = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle saveInstanceState)
     {
-        context = this.getActivity();
-        shouldAutoPlay = true;
-        bandwidthMeter = new DefaultBandwidthMeter();
-        mediaDataSourceFactory = new DefaultDataSourceFactory(context, Util.getUserAgent(context, "mediaPlayerSample"), (TransferListener<? super DataSource>) bandwidthMeter);
-        window = new Timeline.Window();
+        mContext = this.getActivity();
+        mShouldAutoPlay = true;
+        mBandwidthMeter = new DefaultBandwidthMeter();
+        mMediaDataSourceFactory = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext, "mediaPlayerSample"),
+                                                                (TransferListener<? super DataSource>) mBandwidthMeter);
+        mWindow = new Timeline.Window();
 
-        rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
         render();
 
-        //ivHideControllerButton = (ImageView) findViewById(R.id.exo_controller);
-
-        return rootView;
+        return mRootView;
     }
 
     @Override
     public void setElements(List<Step> mSteps,
                             int i)
     {
-        this.recipeStepIndex = i;
+        this.mRecipeStepIndex = i;
         this.mSteps = mSteps;
 
-        if(null!=rootView)
+        if(null!=mRootView)
             render();
     }
 
@@ -129,7 +125,7 @@ public class StepDetailFragment extends BaseFragment
 
     private void render()
     {
-        Step step = mSteps.get(recipeStepIndex);
+        Step step = mSteps.get(mRecipeStepIndex);
         loadDescription(step);
         loadVideo(step);
     }
@@ -147,17 +143,16 @@ public class StepDetailFragment extends BaseFragment
         else if (null!=desc && desc.length()>0)
             str = desc;
 
-        TextView textView = (TextView) rootView.findViewById(R.id.detail_item);
+        TextView textView = (TextView) mRootView.findViewById(R.id.detail_item);
         textView.setText(str);
     }
 
     private void loadVideo(Step step)
     {
-        TextView textView = (TextView)rootView.findViewById(R.id.fragment_video_nada);
-        //VideoView videoView = (VideoView) rootView.findViewById(R.id.video_item);
-        simpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
+        TextView textView = (TextView)mRootView.findViewById(R.id.fragment_video_nada);
+        mSimpleExoPlayerView = (SimpleExoPlayerView) mRootView.findViewById(R.id.player_view);
 
-        ProgressBar progressBar = (ProgressBar)rootView.findViewById(R.id.fragment_progress);
+        ProgressBar progressBar = (ProgressBar)mRootView.findViewById(R.id.fragment_progress);
         progressBar.setVisibility(View.INVISIBLE);
 
         Uri videoUri = step.getVideoUri();
@@ -168,22 +163,18 @@ public class StepDetailFragment extends BaseFragment
         {
             // show error
             textView.setVisibility(View.VISIBLE);
-            simpleExoPlayerView.setVisibility(View.INVISIBLE);
+            mSimpleExoPlayerView.setVisibility(View.INVISIBLE);
+            Toast.makeText(mContext,"No Video available",Toast.LENGTH_SHORT).show();
             return;
         }
         else {
-            uri = (null==videoUri)?
+            mUri = (null==videoUri)?
                         thumbnailUri:
                         videoUri;
 
             textView.setVisibility(View.INVISIBLE);
-            simpleExoPlayerView.setVisibility(View.VISIBLE);
-
-           // initializePlayer();
-
-            // videoView.stopPlayback();
-           // videoView.setVideoURI(uri);
-           // videoView.start();
+            mSimpleExoPlayerView.setVisibility(View.VISIBLE);
+            initializePlayer();
         }
     }
 
@@ -193,51 +184,54 @@ public class StepDetailFragment extends BaseFragment
 
     private void initializePlayer() {
 
-        simpleExoPlayerView.requestFocus();
+        if(null==mUri || 0==mUri.toString().length())
+            return;
+
+        if(null!=mPlayer)
+        {
+            mPlayer.stop();
+            mPlayer.release();
+        }
+
+        mSimpleExoPlayerView.requestFocus();
 
         TrackSelection.Factory videoTrackSelectionFactory =
-                new AdaptiveTrackSelection.Factory(bandwidthMeter);
+                new AdaptiveTrackSelection.Factory(mBandwidthMeter);
 
-        trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+        mTrackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
 
-        player = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
+        mPlayer = ExoPlayerFactory.newSimpleInstance(mContext, mTrackSelector);
 
-        simpleExoPlayerView.setPlayer(player);
+        mSimpleExoPlayerView.setPlayer(mPlayer);
 
-        player.setPlayWhenReady(shouldAutoPlay);
-/*        MediaSource mediaSource = new HlsMediaSource(Uri.parse("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"),
-                mediaDataSourceFactory, mainHandler, null);*/
+        mPlayer.setPlayWhenReady(mShouldAutoPlay);
 
         DefaultExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
 
-        //MediaSource mediaSource = new ExtractorMediaSource(Uri.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"),
-        MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(uri.toString()),
-        mediaDataSourceFactory, extractorsFactory, null, null);
+        MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(mUri.toString()),
+                                                            mMediaDataSourceFactory,
+                                                            extractorsFactory,
+                                                            null,
+                                                            null);
 
-        player.stop();
-        player.prepare(mediaSource);
-/*
-        ivHideControllerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                simpleExoPlayerView.hideController();
-            }
-        }); */
+        mPlayer.stop();
+        mPlayer.prepare(mediaSource);
     }
 
     private void releasePlayer() {
-        if (player != null) {
-            shouldAutoPlay = player.getPlayWhenReady();
-            player.release();
-            player = null;
-            trackSelector = null;
+        if (mPlayer != null) {
+            mShouldAutoPlay = mPlayer.getPlayWhenReady();
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+            mTrackSelector = null;
         }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (Util.SDK_INT > 23) {
+        if (Util.SDK_INT > 23 && null==mPlayer) {
             initializePlayer();
         }
     }
@@ -245,7 +239,7 @@ public class StepDetailFragment extends BaseFragment
     @Override
     public void onResume() {
         super.onResume();
-        if ((Util.SDK_INT <= 23 || player == null)) {
+        if ((Util.SDK_INT <= 23 || mPlayer == null)) {
             initializePlayer();
         }
     }

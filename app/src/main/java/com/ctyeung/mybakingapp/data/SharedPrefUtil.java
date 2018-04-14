@@ -11,16 +11,16 @@ public class SharedPrefUtil {
 
     SharedPreferences sharedPreferences;
 
-    public static final String mypreference = "mypref";
     public static final String STEP_SELECTED = "step";
     public static final String INGREDIENTS_SELECTED = "ingredients";
 
-    private Context context;
+    private Context mContext;
+    public static final String mPref = "mypref";
 
     public SharedPrefUtil(Context context)
     {
-        this.context = context;
-        sharedPreferences = this.context.getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        mContext = context;
+        sharedPreferences = mContext.getSharedPreferences(mPref, Context.MODE_PRIVATE);
     }
 
     public int getStepSelected()

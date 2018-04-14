@@ -12,11 +12,6 @@ public class Recipe
 {
     private JSONObject json;
 
-    public Recipe()
-    {
-
-    }
-
     public Recipe(JSONObject json)
     {
         this.json = json;

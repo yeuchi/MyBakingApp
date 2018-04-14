@@ -25,11 +25,10 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 {
     private static final String TAG = StepListAdapter.class.getSimpleName();
     public static int mViewHolderCount;
-    private static List<ItemViewHolder> holders;
+    private static List<ItemViewHolder> mHolders;
     private static int mNumberItems;
-    private ItemViewHolder viewHolder = null;
     private List<Step> mSteps;
-    private int selected_position = 0;
+    private int mSelectedPos = 0;
 
     final private ListItemClickListener mClickListener;
 
@@ -45,10 +44,10 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         mNumberItems = steps.size();
         mSteps = steps;
         mClickListener = listener;
-        selected_position = init_selected_postion;
+        mSelectedPos = init_selected_postion;
 
-        if(null==holders)
-            holders = new ArrayList<ItemViewHolder>();
+        if(null==mHolders)
+            mHolders = new ArrayList<ItemViewHolder>();
     }
 
     @Override
@@ -63,8 +62,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
 
-        viewHolder = new ItemViewHolder(view);
-        holders.add(viewHolder);
+        ItemViewHolder viewHolder = new ItemViewHolder(view);
+        mHolders.add(viewHolder);
 
         Step step = mSteps.get(mViewHolderCount);
         String name = step.getShortDescription();
@@ -92,25 +91,25 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     {
         Log.d(TAG, "#" + position);
         holder.bind(position);
-        updateSelected(selected_position);
+        updateSelected(mSelectedPos);
     }
 
     public void updateSelected(int index)
     {
         ItemViewHolder holder;
 
-        if(selected_position < holders.size())
+        if(mSelectedPos < mHolders.size())
         {
-            holder = (ItemViewHolder) holders.get(selected_position);
+            holder = (ItemViewHolder) mHolders.get(mSelectedPos);
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        if(index < holders.size())
+        if(index < mHolders.size())
         {
-            holder = (ItemViewHolder) holders.get(index);
+            holder = (ItemViewHolder) mHolders.get(index);
             holder.itemView.setBackgroundColor(Color.GREEN);
         }
-        selected_position = index;
+        mSelectedPos = index;
 
     }
 

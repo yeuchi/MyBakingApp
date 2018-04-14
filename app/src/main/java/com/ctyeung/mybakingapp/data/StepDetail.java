@@ -11,13 +11,13 @@ import org.json.JSONObject;
 public class StepDetail
 {
 
-    protected JSONObject json;
+    protected JSONObject mJson;
 
     public StepDetail(String str )
     {
         try
         {
-            this.json = new JSONObject(str);
+            mJson = new JSONObject(str);
         }
         catch(Exception ex)
         {
@@ -27,7 +27,7 @@ public class StepDetail
 
     public StepDetail(JSONObject json)
     {
-        this.json = json;
+        mJson = json;
 
     }
 }

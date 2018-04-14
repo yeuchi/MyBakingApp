@@ -30,15 +30,14 @@ public class StepsActivity extends AppCompatActivity
     private StepListAdapter.ListItemClickListener mListener;
     private StepListAdapter mListAdapter;
 
-    private Toast _toast;
     private RecyclerView mRecipeList;
 
     private List<Step> mSteps;
     private Recipe mRecipe;
 
-    private int stepDetailIndex = 0;
-    private BaseFragment fragment=null;
-    private FragmentManager fragmentManager;
+    private int mStepDetailIndex = 0;
+    private BaseFragment mFragment=null;
+    private FragmentManager mFragmentManager;
 
     private SharedPrefUtil sharedPrefUtil;
 
@@ -51,7 +50,7 @@ public class StepsActivity extends AppCompatActivity
 
         // get last know index
         sharedPrefUtil = new SharedPrefUtil(getApplicationContext());
-        stepDetailIndex = sharedPrefUtil.getStepSelected();
+        mStepDetailIndex = sharedPrefUtil.getStepSelected();
 
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
         mRecipeList = (RecyclerView) this.findViewById(R.id.step_list);
@@ -68,27 +67,27 @@ public class StepsActivity extends AppCompatActivity
         if(isTwoPane)
         {
             // remove existing fragment
-            if(fragment != null)
+            if(mFragment != null)
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .remove(fragment)
+                        .remove(mFragment)
                         .commit();
 
             // insert fragment
-            if(0==stepDetailIndex)
+            if(0==mStepDetailIndex)
             {
-                fragment = new StepIngredientsFragment();
-                fragment.setElement(mRecipe);
+                mFragment = new StepIngredientsFragment();
+                mFragment.setElement(mRecipe);
             }
             else
             {
-                fragment = new StepDetailFragment();
-                fragment.setElements(mSteps, stepDetailIndex);
+                mFragment = new StepDetailFragment();
+                mFragment.setElements(mSteps, mStepDetailIndex);
             }
 
-            fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.frame_step_detail, fragment)
+            mFragmentManager = getSupportFragmentManager();
+            mFragmentManager.beginTransaction()
+                    .add(R.id.frame_step_detail, mFragment)
                     .commit();
         }
     }
@@ -101,7 +100,7 @@ public class StepsActivity extends AppCompatActivity
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
 
         StepListAdapter.mViewHolderCount = 0;
-        mListAdapter = new StepListAdapter(mListener, mSteps, stepDetailIndex);
+        mListAdapter = new StepListAdapter(mListener, mSteps, mStepDetailIndex);
         mRecipeList.setAdapter(mListAdapter);
         mRecipeList.setHasFixedSize(true);
     }
@@ -109,7 +108,7 @@ public class StepsActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
-        stepDetailIndex = clickItemIndex;
+        mStepDetailIndex = clickItemIndex;
 
         // phone mode
         if(false==isTwoPane)
@@ -121,6 +120,7 @@ public class StepsActivity extends AppCompatActivity
             // need to parse for mRecipe from List<Step>
             String str = mRecipe.getJSONString();
             intent.putExtra(Intent.EXTRA_TEXT, str);
+            intent.putExtra(Intent.EXTRA_INDEX, clickItemIndex);
             startActivity(intent);
         }
         // tablet mode
@@ -133,7 +133,7 @@ public class StepsActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        sharedPrefUtil.setStepSelected(stepDetailIndex);
+        sharedPrefUtil.setStepSelected(mStepDetailIndex);
         super.onDestroy();
     }
 }

@@ -30,18 +30,18 @@ public class StepIngredientsFragment extends BaseFragment
     private IngredientListAdapter.ListItemClickListener mListener;
     private IngredientListAdapter mListAdapter;
     private List<Ingredient> mIngredients;
-    private View rootView;
+    private View mRootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle saveInstanceState)
     {
-        rootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
-        Context context = rootView.getContext();
+        mRootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
+        Context context = mRootView.getContext();
 
         GridLayoutManager reviewManager = new GridLayoutManager(context, 1);
-        mIngredientList = (RecyclerView) rootView.findViewById(R.id.ingredient_list);
+        mIngredientList = (RecyclerView) mRootView.findViewById(R.id.ingredient_list);
         mIngredientList.setLayoutManager(reviewManager);
         mListener = this;
 
@@ -49,7 +49,7 @@ public class StepIngredientsFragment extends BaseFragment
         mIngredientList.setAdapter(mListAdapter);
         mIngredientList.setHasFixedSize(true);
 
-        return rootView;
+        return mRootView;
     }
 
     @Override
