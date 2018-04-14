@@ -39,7 +39,7 @@ public class StepsActivity extends AppCompatActivity
     private BaseFragment mFragment=null;
     private FragmentManager mFragmentManager;
 
-    private SharedPrefUtil sharedPrefUtil;
+    private SharedPrefUtil mSharedPrefUtil;
 
 
     @Override
@@ -49,8 +49,8 @@ public class StepsActivity extends AppCompatActivity
         setContentView(R.layout.activity_steps);
 
         // get last know index
-        sharedPrefUtil = new SharedPrefUtil(getApplicationContext());
-        mStepDetailIndex = sharedPrefUtil.getStepSelected();
+        mSharedPrefUtil = new SharedPrefUtil(getApplicationContext());
+        mStepDetailIndex = mSharedPrefUtil.getStepSelected();
 
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
         mRecipeList = (RecyclerView) this.findViewById(R.id.step_list);
@@ -77,7 +77,7 @@ public class StepsActivity extends AppCompatActivity
             if(0==mStepDetailIndex)
             {
                 mFragment = new StepIngredientsFragment();
-                mFragment.setElement(mRecipe);
+                mFragment.setElement(mRecipe, mStepDetailIndex);
             }
             else
             {
@@ -99,7 +99,7 @@ public class StepsActivity extends AppCompatActivity
         mRecipe = new Recipe(json);
         mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
 
-        StepListAdapter.mViewHolderCount = 0;
+        StepListAdapter.Reset();
         mListAdapter = new StepListAdapter(mListener, mSteps, mStepDetailIndex);
         mRecipeList.setAdapter(mListAdapter);
         mRecipeList.setHasFixedSize(true);
@@ -133,7 +133,7 @@ public class StepsActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        sharedPrefUtil.setStepSelected(mStepDetailIndex);
+        mSharedPrefUtil.setStepSelected(mStepDetailIndex);
         super.onDestroy();
     }
 }

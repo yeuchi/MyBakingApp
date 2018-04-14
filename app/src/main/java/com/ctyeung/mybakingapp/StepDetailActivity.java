@@ -71,7 +71,7 @@ public class StepDetailActivity extends AppCompatActivity
         if(0==mRecipeStepIndex)
         {
             mFragment = new StepIngredientsFragment();
-            mFragment.setElement(mRecipe);
+            mFragment.setElement(mRecipe, 0);
         }
         else
         {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.ctyeung.mybakingapp.data.Ingredient;
 import com.ctyeung.mybakingapp.data.Recipe;
 import com.ctyeung.mybakingapp.data.RecipeFactory;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
 
 import org.json.JSONObject;
@@ -31,6 +32,7 @@ public class StepIngredientsFragment extends BaseFragment
     private IngredientListAdapter mListAdapter;
     private List<Ingredient> mIngredients;
     private View mRootView;
+    private SharedPrefUtil mSharedPrefUtil;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -40,12 +42,18 @@ public class StepIngredientsFragment extends BaseFragment
         mRootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
         Context context = mRootView.getContext();
 
+        // get last know index
+        mSharedPrefUtil = new SharedPrefUtil(context);
+        mSelectedPos = mSharedPrefUtil.getStepSelected();
+
         GridLayoutManager reviewManager = new GridLayoutManager(context, 1);
         mIngredientList = (RecyclerView) mRootView.findViewById(R.id.ingredient_list);
         mIngredientList.setLayoutManager(reviewManager);
         mListener = this;
 
+        IngredientListAdapter.Reset();
         mListAdapter = new IngredientListAdapter(mListener, mIngredients);
+
         mIngredientList.setAdapter(mListAdapter);
         mIngredientList.setHasFixedSize(true);
 
@@ -53,11 +61,14 @@ public class StepIngredientsFragment extends BaseFragment
     }
 
     @Override
-    public void setElement(Recipe recipe)
+    public void setElement(Recipe recipe,
+                           int selectedPos)
     {
         mIngredients = RecipeFactory.IngredientsJsonArray2List(recipe.getIngredients());
+        mSelectedPos = selectedPos;
 
         IngredientListAdapter.mViewHolderCount = 0;
+        IngredientListAdapter.mSelectedPosition = mSelectedPos;
     }
 
     @Override
@@ -77,6 +88,13 @@ public class StepIngredientsFragment extends BaseFragment
         {
             throw new ClassCastException(context.toString() + "must implement OnClickListener");
         }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        mSharedPrefUtil.setStepSelected(mSelectedPos);
+        super.onDestroy();
     }
 
 }

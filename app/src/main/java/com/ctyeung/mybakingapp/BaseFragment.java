@@ -14,14 +14,17 @@ import java.util.List;
 
 public class BaseFragment extends Fragment
 {
+    protected int mSelectedPos = 0;
+
     public void setElements(List<Step> mSteps,
                             int i)
     {
 
     }
 
-    public void setElement(Recipe recipe)
+    public void setElement(Recipe recipe,
+                           int i)
     {
-
+        mSelectedPos = i;
     }
 }

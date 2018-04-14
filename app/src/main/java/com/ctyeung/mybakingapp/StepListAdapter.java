@@ -24,9 +24,10 @@ import java.util.List;
 public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemViewHolder>
 {
     private static final String TAG = StepListAdapter.class.getSimpleName();
-    public static int mViewHolderCount;
-    private static List<ItemViewHolder> mHolders;
-    private static int mNumberItems;
+    public static int mViewHolderCount=0;
+    private static List<ItemViewHolder> mHolders=null;
+    private static int mNumberItems=0;
+
     private List<Step> mSteps;
     private int mSelectedPos = 0;
 
@@ -35,6 +36,13 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
     public interface ListItemClickListener
     {
         void onListItemClick(int clickItemIndex);
+    }
+
+    static public void Reset()
+    {
+        mHolders = null;
+        mViewHolderCount = 0;
+        mNumberItems = 0;
     }
 
     public StepListAdapter(ListItemClickListener listener,

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ctyeung.mybakingapp.data.Ingredient;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import com.ctyeung.mybakingapp.data.Step;
 
 import java.util.ArrayList;
@@ -22,15 +23,22 @@ import java.util.List;
 public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAdapter.ItemViewHolder>
 {
     private static final String TAG = IngredientListAdapter.class.getSimpleName();
-    public static int mViewHolderCount;
-    private static List<ItemViewHolder> mHolders;
-    private List<Ingredient> mIngredients;
-    private int mSelectedPosition = 0;
+    public static int mSelectedPosition = 0;
+    public static int mViewHolderCount=0;
+    private static List<ItemViewHolder> mHolders=null;
 
+    private List<Ingredient> mIngredients;
 
     public interface ListItemClickListener
     {
         void onListItemClick(int clickItemIndex);
+    }
+
+    public static void Reset()
+    {
+        mViewHolderCount = 0;
+        mSelectedPosition = 0;
+        mHolders = null;
     }
 
     public IngredientListAdapter(ListItemClickListener listener,
@@ -41,6 +49,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         if(null==mHolders)
             mHolders = new ArrayList<ItemViewHolder>();
     }
+
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup,
                                              int viewType)
@@ -87,7 +96,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     {
         Log.d(TAG, "#" + position);
         holder.bind(position);
-        updateSelected(0);
+        updateSelected(mSelectedPosition);
 
         holder.itemView.setOnClickListener (new View.OnClickListener() {
             @Override
@@ -101,12 +110,14 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     public void updateSelected(int index)
     {
         ItemViewHolder holder;
+        // clear previous selected position
         if(mSelectedPosition < mHolders.size())
         {
             holder = (ItemViewHolder) mHolders.get(mSelectedPosition);
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
 
+        // highlight new position
         if(index < mHolders.size())
         {
             holder = (ItemViewHolder) mHolders.get(index);
