@@ -32,9 +32,9 @@ One of the skills you will demonstrate in this project is how to handle unexpect
 # Layout 
 https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks/bakingapp-mocks.pdf
 
-# Implementation
+# Implementation screenshots: widget -> main -> steps -> ingredients / step detail
 
-## Phone: widget -> main -> steps -> ingredients / step detail
+## Phone
 
 ![widget](https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png)
 ![mainactivity](https://user-images.githubusercontent.com/1282659/38772165-1c1f1044-3ff6-11e8-9df2-e7f71a674782.png)
@@ -43,6 +43,7 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 ![detail_step](https://user-images.githubusercontent.com/1282659/38772162-1bef594e-3ff6-11e8-9bf8-e4831d66d4a9.png)
 
 ## Tablet
+![widget600](https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png)
 ![steps600](https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png)
 ![ingredients600](https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png)
 ![mainactivity600](https://user-images.githubusercontent.com/1282659/38772169-2449b4ea-3ff6-11e8-932c-d59ec9251e3c.png)
