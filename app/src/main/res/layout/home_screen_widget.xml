@@ -6,23 +6,13 @@
     android:background="#09C"
     android:padding="@dimen/widget_margin">
 
-        <TextView
-            android:id="@+id/appwidget_text"
+        <ListView
+            android:id="@+id/widgetList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="8dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
             android:background="#09C"
-            android:text="@string/appwidget_text"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
-            android:scrollbars="vertical"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollY="@dimen/exo_media_button_width"
-            android:isScrollContainer="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            />
 
 </LinearLayout>

@@ -1,69 +1,44 @@
 package com.ctyeung.mybakingapp;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
-import android.content.SharedPreferences;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.TextView;
-
-import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class HomeScreenWidget extends AppWidgetProvider
 {
-    private void updateAppWidget(Context context,
-                                 AppWidgetManager appWidgetManager,
-                                 int appWidgetId,
-                                 String str)
-    {
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.home_screen_widget);
-        //RemoteViews views = updateWidgetListView(context, appWidgetId);
-        views.setTextViewText(R.id.appwidget_text, str);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
-
-    /*private RemoteViews updateWidgetListView(Context context,
-    //                                         int appWidgetId) {
-
-        //which layout to show on widget
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                R.layout.home_screen_widget);
-
-        //RemoteViews Service needed to provide adapter for ListView
-        Intent svcIntent = new Intent(context, HomeScreenService.class);
-        //passing app widget id to that RemoteViews Service
-        svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        //setting a unique Uri to the intent
-        //don't know its purpose to me right now
-        svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
-        //setting adapter to listview of the widget
-        //remoteViews.setRemoteAdapter(appWidgetId,
-        //                            R.id.listViewWidget,
-        //                            svcIntent);
-        //setting an empty view in case of no data
-        //remoteViews.setEmptyView(R.id.listViewWidget, R.id.empty_view);
-        return remoteViews;
-    }*/
-
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
-    {
-        SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(context);
-        String str = sharedPrefUtil.getIngredients();
+    public void onUpdate(Context ctxt,
+                         AppWidgetManager appWidgetManager,
+                         int[] appWidgetIds) {
+        for (int i=0; i<appWidgetIds.length; i++) {
+            Intent svcIntent=new Intent(ctxt, HomeScreenService.class);
 
-        String filterLine = str.replace(",", "\n");
-        String filterEnd = filterLine.replace("}", "\n");
-        String filterStarter = filterEnd.replaceAll("[^a-zA-Z0-9\n: ]","");
-        updateAppWidget(context, appWidgetManager, appWidgetIds[0], filterStarter);
+            svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
+            svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+            RemoteViews widget=new RemoteViews(ctxt.getPackageName(),
+                    R.layout.home_screen_widget);
+
+            widget.setRemoteAdapter(appWidgetIds[i], R.id.widgetList, svcIntent);
+
+            Intent clickIntent=new Intent(ctxt, MainActivity.class);
+            PendingIntent intent=PendingIntent.getActivity(ctxt, 0,
+                                                            clickIntent,
+                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+
+            widget.setPendingIntentTemplate(R.id.widgetList, intent);
+            appWidgetManager.updateAppWidget(appWidgetIds[i], widget);
+        }
+
+        super.onUpdate(ctxt, appWidgetManager, appWidgetIds);
     }
 
     @Override
