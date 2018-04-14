@@ -34,13 +34,13 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 
 # Implementation
 
-## Phone
+## Phone: widget -> main -> steps -> ingredients / step detail
 
 ![widget](https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png)
-![detail_step](https://user-images.githubusercontent.com/1282659/38772162-1bef594e-3ff6-11e8-9bf8-e4831d66d4a9.png)
-![ingredients](https://user-images.githubusercontent.com/1282659/38772163-1bfe6786-3ff6-11e8-9e8e-8bee0a8a4a85.png)
-![steps](https://user-images.githubusercontent.com/1282659/38772164-1c10a72a-3ff6-11e8-9e2a-89f3acf266f0.png)
 ![mainactivity](https://user-images.githubusercontent.com/1282659/38772165-1c1f1044-3ff6-11e8-9df2-e7f71a674782.png)
+![steps](https://user-images.githubusercontent.com/1282659/38772164-1c10a72a-3ff6-11e8-9e2a-89f3acf266f0.png)
+![ingredients](https://user-images.githubusercontent.com/1282659/38772163-1bfe6786-3ff6-11e8-9e8e-8bee0a8a4a85.png)
+![detail_step](https://user-images.githubusercontent.com/1282659/38772162-1bef594e-3ff6-11e8-9bf8-e4831d66d4a9.png)
 
 ## Tablet
 ![steps600](https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png)
