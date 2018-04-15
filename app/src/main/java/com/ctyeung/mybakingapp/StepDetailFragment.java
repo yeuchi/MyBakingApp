@@ -61,6 +61,10 @@ import android.content.Context;
 
 /**
  * Created by ctyeung on 3/17/18.
+ *
+ * Reference: Video player from ExoPlayer
+ * https://github.com/google/ExoPlayer
+ * https://github.com/yusufcakmak/ExoPlayerSample
  */
 
 public class StepDetailFragment extends BaseFragment
