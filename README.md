@@ -32,7 +32,8 @@ One of the skills you will demonstrate in this project is how to handle unexpect
 # Layout 
 https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks/bakingapp-mocks.pdf
 
-# Implementation screenshots: widget -> main -> steps -> ingredients / step detail
+# Implementation screenshots: 
+widget -> main -> steps -> ingredients / step detail
 
 ## Phone
 
@@ -50,9 +51,9 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 
 # References
 
-## Widget base on Mark Murphy's example
+Widget base on Mark Murphy's example
 https://github.com/commonsguy/cw-advandroid/tree/master/AppWidget/LoremWidget
  
-## Video player base on ExoPlayer 
+Video player base on ExoPlayer 
 https://github.com/google/ExoPlayer 
 https://github.com/yusufcakmak/ExoPlayerSample
