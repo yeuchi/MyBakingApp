@@ -37,6 +37,10 @@ import butterknife.BindView;
 
 import static butterknife.ButterKnife.findById;
 
+/*
+ * Reference: Jake Wharton's ButterKnife
+ * http://jakewharton.github.io/butterknife/
+ */
 public class MainActivity extends AppCompatActivity
         implements RecipeListAdapter.ListItemClickListener {
 

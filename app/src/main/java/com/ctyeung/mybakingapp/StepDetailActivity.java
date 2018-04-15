@@ -24,6 +24,9 @@ import butterknife.BindView;
 
 /**
  * Created by ctyeung on 3/5/18.
+ *
+ * Reference: Jake Wharton's ButterKnife
+ * http://jakewharton.github.io/butterknife/
  */
 
 public class StepDetailActivity extends AppCompatActivity
