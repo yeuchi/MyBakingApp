@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         }
         catch(Exception ex)
         {
-            Log.e(Resources.getSystem().getString(R.string.http_test),Log.getStackTraceString(ex));
+            Log.e(this.getResources().getString(R.string.http_test),Log.getStackTraceString(ex));
         }
     }
 

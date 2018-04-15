@@ -100,7 +100,8 @@ public class StepDetailFragment extends BaseFragment
 
         mShouldAutoPlay = true;
         mBandwidthMeter = new DefaultBandwidthMeter();
-        mMediaDataSourceFactory = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext, "mediaPlayerSample"),
+        mMediaDataSourceFactory = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext,
+                                                                mContext.getResources().getString(R.string.mediaPlayerSample)),
                                                                 (TransferListener<? super DataSource>) mBandwidthMeter);
         mWindow = new Timeline.Window();
 
