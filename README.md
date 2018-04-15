@@ -47,3 +47,12 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 ![mainactivity600](https://user-images.githubusercontent.com/1282659/38772169-2449b4ea-3ff6-11e8-932c-d59ec9251e3c.png)
 ![ingredients600](https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png)
 ![steps600](https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png)
+
+# References
+
+## Widget base on Mark Murphy's example
+https://github.com/commonsguy/cw-advandroid/tree/master/AppWidget/LoremWidget
+ 
+## Video player base on ExoPlayer 
+https://github.com/google/ExoPlayer 
+https://github.com/yusufcakmak/ExoPlayerSample
