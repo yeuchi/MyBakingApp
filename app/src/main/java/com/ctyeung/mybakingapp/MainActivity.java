@@ -31,17 +31,22 @@ import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
 import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import org.json.JSONArray;
-import org.json.JSONObject;
+
+import butterknife.ButterKnife;
+import butterknife.BindView;
+
+import static butterknife.ButterKnife.findById;
 
 public class MainActivity extends AppCompatActivity
         implements RecipeListAdapter.ListItemClickListener {
 
     private List<Recipe> mRecipes;
-    private ProgressBar mLoadingIndicator;
     private RecipeListAdapter.ListItemClickListener mListener;
-    private TextView mNetworkErrorDisplay;
     private RecipeListAdapter mListAdapter;
-    private RecyclerView mRecyclerViewList;
+
+    public @BindView(R.id.pb_display_progress) ProgressBar mLoadingIndicator;
+    public @BindView(R.id.tv_network_error_display) TextView mNetworkErrorDisplay;
+    public @BindView(R.id.recipe_list) RecyclerView mRecyclerViewList;
     private SharedPrefUtil mSharedPrefUtil;
 
     @Override
@@ -49,19 +54,17 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
         mSharedPrefUtil = new SharedPrefUtil(this);
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_display_progress);
-        mNetworkErrorDisplay = (TextView) findViewById(R.id.tv_network_error_display);
 
         int columns = calNumOfColumns();
         GridLayoutManager layoutManager = new GridLayoutManager(this, columns);
-        mRecyclerViewList = (RecyclerView) findViewById(R.id.recipe_list);
         mRecyclerViewList.setLayoutManager(layoutManager);
         mListener = this;
-
         requestRecipes();
     }
 

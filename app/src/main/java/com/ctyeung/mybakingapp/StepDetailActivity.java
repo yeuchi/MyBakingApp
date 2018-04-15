@@ -19,6 +19,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import butterknife.ButterKnife;
+import butterknife.BindView;
+
 /**
  * Created by ctyeung on 3/5/18.
  */
@@ -32,14 +35,15 @@ public class StepDetailActivity extends AppCompatActivity
     private BaseFragment mFragment;
     private FragmentManager mFragmentManager;
 
-    private TextView mBtnNext;
-    private TextView mBtnPrevious;
+    public @BindView(R.id.btn_previous) TextView mBtnPrevious;
+    public @BindView(R.id.btn_next) TextView mBtnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
+        ButterKnife.bind(this);
 
         parseSteps();
         SetFragment();

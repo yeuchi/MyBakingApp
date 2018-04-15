@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.content.Intent;
 
@@ -17,6 +18,9 @@ import com.ctyeung.mybakingapp.data.Step;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
 import java.util.List;
 import org.json.JSONObject;
+
+import butterknife.ButterKnife;
+import butterknife.BindView;
 
 /**
  * Created by ctyeung on 3/5/18.
@@ -30,7 +34,7 @@ public class StepsActivity extends AppCompatActivity
     private StepListAdapter.ListItemClickListener mListener;
     private StepListAdapter mListAdapter;
 
-    private RecyclerView mRecipeList;
+    public @BindView(R.id.step_list) RecyclerView mRecipeList;
 
     private List<Step> mSteps;
     private Recipe mRecipe;
@@ -47,13 +51,13 @@ public class StepsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
+        ButterKnife.bind(this);
 
         // get last know index
         mSharedPrefUtil = new SharedPrefUtil(getApplicationContext());
         mStepDetailIndex = mSharedPrefUtil.getStepSelected();
 
         GridLayoutManager reviewManager = new GridLayoutManager(this, 1);
-        mRecipeList = (RecyclerView) this.findViewById(R.id.step_list);
         mRecipeList.setLayoutManager(reviewManager);
         mListener = this;
         parseSteps();
