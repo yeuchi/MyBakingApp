@@ -11,6 +11,8 @@ import android.net.Uri;
 
 /**
  * Implementation of App Widget functionality.
+ * - base on Mark Murphy's example
+ * https://github.com/commonsguy/cw-advandroid/tree/master/AppWidget/LoremWidget
  */
 public class HomeScreenWidget extends AppWidgetProvider
 {

@@ -6,6 +6,8 @@ import android.content.Intent;
 
 /**
  * Created by ctyeung on 4/8/18.
+ * - base on Mark Murphy's example
+ * https://github.com/commonsguy/cw-advandroid/tree/master/AppWidget/LoremWidget
  */
 
 public class HomeScreenService extends RemoteViewsService

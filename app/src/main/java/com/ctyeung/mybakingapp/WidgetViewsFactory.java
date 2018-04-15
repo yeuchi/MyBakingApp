@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * Created by ctyeung on 4/14/18.
+ * - base on Mark Murphy's example
+ * https://github.com/commonsguy/cw-advandroid/tree/master/AppWidget/LoremWidget
  */
 
 
