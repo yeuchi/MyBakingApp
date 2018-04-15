@@ -52,8 +52,10 @@ widget -> main -> steps -> ingredients / step detail
 # References
 
 Widget base on Mark Murphy's example
+
 https://github.com/commonsguy/cw-advandroid/tree/master/AppWidget/LoremWidget
  
 Video player base on ExoPlayer 
+
 https://github.com/google/ExoPlayer 
 https://github.com/yusufcakmak/ExoPlayerSample
