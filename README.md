@@ -60,3 +60,7 @@ Video player base on ExoPlayer
 https://github.com/google/ExoPlayer 
 
 https://github.com/yusufcakmak/ExoPlayerSample
+
+ButterKnife by Jake Wharton
+
+http://jakewharton.github.io/butterknife/
