@@ -1,6 +1,7 @@
 package com.ctyeung.mybakingapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -66,15 +67,15 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 
         Ingredient ingredient = mIngredients.get(mViewHolderCount);
         String quantity = ingredient.getQuantity();
-        holder.textViewQuantity.setText("Quantity: "+quantity);
+        holder.textViewQuantity.setText(context.getResources().getString(R.string.quantity_)+quantity);
 
         String measure = ingredient.getMeasure();
-        holder.textViewMeasure.setText("Measure: "+measure);
+        holder.textViewMeasure.setText(context.getResources().getString(R.string.measure_)+measure);
 
         String stuff = ingredient.getIngredient();
-        holder.textViewIngredient.setText("Ingredient: "+stuff);
+        holder.textViewIngredient.setText(context.getResources().getString(R.string.ingredient_)+stuff);
 
-        Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: " + mViewHolderCount);
+        Log.d(TAG, context.getResources().getString(R.string.num_viewholders) + mViewHolderCount);
 
         mViewHolderCount++;
         return holder;

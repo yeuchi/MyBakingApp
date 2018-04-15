@@ -1,11 +1,15 @@
 package com.ctyeung.mybakingapp.data;
 
+import android.content.res.Resources;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
+import com.ctyeung.mybakingapp.R;
+import android.content.Context;
 
 /**
  * Created by ctyeung on 2/25/18.
@@ -28,13 +32,14 @@ public class RecipeFactory
         return recipes;
     }
 
-    public static List<Step> StepsJsonArray2List(JSONArray stepsJSON)
+    public static List<Step> StepsJsonArray2List(JSONArray stepsJSON,
+                                                 Context context)
     {
         List<Step> steps = new ArrayList<Step>();
 
         // insert ingredient as 1st step
-        String str = "{\"shortDescription\":\"Ingredients\"}";
-        Step step = new Step(str);
+        String str = context.getResources().getString(R.string.desc_ingredients);
+        Step step = new Step(str, context);
         steps.add(0, step);
 
         // insert detail steps

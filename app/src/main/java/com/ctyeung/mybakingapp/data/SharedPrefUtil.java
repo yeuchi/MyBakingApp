@@ -2,6 +2,8 @@ package com.ctyeung.mybakingapp.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import com.ctyeung.mybakingapp.R;
 
 /**
  * Created by ctyeung on 3/24/18.
@@ -14,9 +16,9 @@ public class SharedPrefUtil {
     public static final String STEP_SELECTED = "step";
     public static final String INGREDIENT_SELECTED = "ingredient";
     public static final String INGREDIENTS_SELECTED = "ingredients";
+    public static final String mPref = "mypref";
 
     private Context mContext;
-    public static final String mPref = "mypref";
 
     public SharedPrefUtil(Context context)
     {
@@ -51,7 +53,8 @@ public class SharedPrefUtil {
 
     public String getIngredients()
     {
-        return sharedPreferences.getString(INGREDIENTS_SELECTED, "not available");
+        return sharedPreferences.getString(INGREDIENTS_SELECTED,
+                mContext.getResources().getString(R.string.not_available));
     }
 
     public void setIngredients(String str)

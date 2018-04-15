@@ -1,6 +1,7 @@
 package com.ctyeung.mybakingapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
@@ -77,7 +78,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         String name = step.getShortDescription();
         viewHolder.button.setText(name);
 
-        Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: " + mViewHolderCount);
+        Log.d(TAG, context.getResources().getString(R.string.num_viewholders) +
+                Integer.toString(mViewHolderCount));
 
         mViewHolderCount++;
         return viewHolder;

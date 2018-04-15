@@ -1,5 +1,6 @@
 package com.ctyeung.mybakingapp;
 
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class StepIngredientsFragment extends BaseFragment
     private List<Ingredient> mIngredients;
     private View mRootView;
     private SharedPrefUtil mSharedPrefUtil;
+    private Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -40,13 +42,13 @@ public class StepIngredientsFragment extends BaseFragment
                              Bundle saveInstanceState)
     {
         mRootView = inflater.inflate(R.layout.fragment_ingredients, container, false);
-        Context context = mRootView.getContext();
+        mContext = mRootView.getContext();
 
         // get last know index
-        mSharedPrefUtil = new SharedPrefUtil(context);
+        mSharedPrefUtil = new SharedPrefUtil(mContext);
         mSelectedPos = mSharedPrefUtil.getStepSelected();
 
-        GridLayoutManager reviewManager = new GridLayoutManager(context, 1);
+        GridLayoutManager reviewManager = new GridLayoutManager(mContext, 1);
         mIngredientList = (RecyclerView) mRootView.findViewById(R.id.ingredient_list);
         mIngredientList.setLayoutManager(reviewManager);
         mListener = this;
@@ -86,7 +88,8 @@ public class StepIngredientsFragment extends BaseFragment
         }
         catch (ClassCastException e)
         {
-            throw new ClassCastException(context.toString() + "must implement OnClickListener");
+            throw new ClassCastException(context.toString() +
+                    mContext.getResources().getString(R.string.implement_click));
         }
     }
 

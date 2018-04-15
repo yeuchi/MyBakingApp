@@ -55,7 +55,7 @@ public class StepDetailActivity extends AppCompatActivity
         String str = this.getIntent().getStringExtra(Intent.EXTRA_TEXT);
         JSONObject json = JSONHelper.parseJson(str);
         mRecipe = new Recipe(json);
-        mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps());
+        mSteps = RecipeFactory.StepsJsonArray2List(mRecipe.getSteps(), this);
     }
 
     private void SetFragment()

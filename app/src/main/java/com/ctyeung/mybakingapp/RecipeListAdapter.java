@@ -64,7 +64,8 @@ import com.ctyeung.mybakingapp.R;
             String name = recipe.getName();
             viewHolder.button.setText(name);
 
-            Log.d(TAG, "onCreateViewHolder: number of ViewHolders created: " + mViewHolderCount);
+            String string = context.getResources().getString(R.string.num_viewholders) + mViewHolderCount;
+            Log.d(TAG, string);
 
             mViewHolderCount++;
             return viewHolder;

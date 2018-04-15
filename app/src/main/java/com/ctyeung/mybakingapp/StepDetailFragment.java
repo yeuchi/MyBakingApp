@@ -1,6 +1,7 @@
 package com.ctyeung.mybakingapp;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.widget.VideoView;
 
 import com.ctyeung.mybakingapp.data.Recipe;
 import com.ctyeung.mybakingapp.data.RecipeFactory;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import com.ctyeung.mybakingapp.data.Step;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -33,6 +35,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.util.Util;
 import org.json.JSONObject;
 import java.util.List;
+import com.ctyeung.mybakingapp.R;
 
 /////////////////////////////////
 
@@ -62,6 +65,7 @@ import android.content.Context;
 
 public class StepDetailFragment extends BaseFragment
 {
+    public static final String NO_VIDEO_AVAIL = "no video available";
     // exo-player
     private SimpleExoPlayerView mSimpleExoPlayerView;
     private SimpleExoPlayer mPlayer;
@@ -73,6 +77,7 @@ public class StepDetailFragment extends BaseFragment
     private BandwidthMeter mBandwidthMeter;
     private Context mContext;
     private Uri mUri;
+    private SharedPrefUtil mSharedPrefUtil;
 
     ////////////////////////////////////////////////////////////////
 
@@ -87,6 +92,8 @@ public class StepDetailFragment extends BaseFragment
                              Bundle saveInstanceState)
     {
         mContext = this.getActivity();
+        mSharedPrefUtil = new SharedPrefUtil(mContext);
+
         mShouldAutoPlay = true;
         mBandwidthMeter = new DefaultBandwidthMeter();
         mMediaDataSourceFactory = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext, "mediaPlayerSample"),
@@ -119,15 +126,18 @@ public class StepDetailFragment extends BaseFragment
         }
         catch (ClassCastException e)
         {
-            throw new ClassCastException(context.toString() + "must implement OnClickListener");
+            throw new ClassCastException(context.toString() +
+                    mContext.getResources().getString(R.string.implement_click));
         }
     }
 
     private void render()
     {
-        Step step = mSteps.get(mRecipeStepIndex);
-        loadDescription(step);
-        loadVideo(step);
+        if(null!=mSteps) {
+            Step step = mSteps.get(mRecipeStepIndex);
+            loadDescription(step);
+            loadVideo(step);
+        }
     }
 
     private void loadDescription(Step step)
@@ -135,7 +145,7 @@ public class StepDetailFragment extends BaseFragment
         String desc = step.getDescription();
         String shortDesc = step.getShortDescription();
 
-        String str = "no description available.";
+        String str = mContext.getResources().getString(R.string.no_desc_avail);
 
         if(null!=desc && desc.length()>0)
             str = desc;
@@ -164,7 +174,8 @@ public class StepDetailFragment extends BaseFragment
             // show error
             textView.setVisibility(View.VISIBLE);
             mSimpleExoPlayerView.setVisibility(View.INVISIBLE);
-            Toast.makeText(mContext,"No Video available",Toast.LENGTH_SHORT).show();
+            //String str = mContext.getResources().getString(R.string.no_video_avail); breaks for unknown reason
+            Toast.makeText(mContext,NO_VIDEO_AVAIL,Toast.LENGTH_SHORT).show();
             return;
         }
         else {
@@ -258,5 +269,12 @@ public class StepDetailFragment extends BaseFragment
         if (Util.SDK_INT > 23) {
             releasePlayer();
         }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        onStop();
+        super.onDestroy();
     }
 }

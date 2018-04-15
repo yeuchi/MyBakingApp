@@ -19,6 +19,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
     private static List<String> mItems=null;
     private Context mContext=null;
     private int mAppWidgetId;
+    public static final String KEY_EXTRA = "extra";
 
     public WidgetViewsFactory(Context context,
                               Intent intent) {
@@ -59,7 +60,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
         Intent i=new Intent();
         Bundle extras=new Bundle();
 
-        extras.putString("extra", mItems.get(position));
+        extras.putString(KEY_EXTRA, mItems.get(position));
         i.putExtras(extras);
         remoteViews.setOnClickFillInIntent(R.id.widgetTextView, i);
         return(remoteViews);

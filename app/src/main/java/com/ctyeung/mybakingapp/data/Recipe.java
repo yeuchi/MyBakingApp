@@ -11,6 +11,10 @@ import org.json.JSONObject;
 public class Recipe
 {
     private JSONObject json;
+    private static final String KEY_ID = "id";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_INGREDIENTS = "ingredients";
+    private static final String KEY_STEPS = "steps";
 
     public Recipe(JSONObject json)
     {
@@ -19,12 +23,12 @@ public class Recipe
 
     public String getId()
     {
-        return JSONHelper.parseValueByKey(json, "id");
+        return JSONHelper.parseValueByKey(json, KEY_ID);
     }
 
     public String getName()
     {
-        return JSONHelper.parseValueByKey(json, "name");
+        return JSONHelper.parseValueByKey(json, KEY_NAME);
     }
 
     /*
@@ -32,14 +36,14 @@ public class Recipe
      */
     public JSONArray getIngredients()
     {
-        String str = JSONHelper.parseValueByKey(json, "ingredients");
+        String str = JSONHelper.parseValueByKey(json, KEY_INGREDIENTS);
         JSONArray array = JSONHelper.parseJsonArray(str);
         return array;
     }
 
     public JSONArray getSteps()
     {
-        String str = JSONHelper.parseValueByKey(json, "steps");
+        String str = JSONHelper.parseValueByKey(json, KEY_STEPS);
         JSONArray array = JSONHelper.parseJsonArray(str);
         return array;
     }

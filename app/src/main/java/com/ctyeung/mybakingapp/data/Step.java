@@ -1,5 +1,6 @@
 package com.ctyeung.mybakingapp.data;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -16,9 +17,15 @@ import java.net.URL;
 
 public class Step extends StepDetail
 {
-    public Step(String str )
+    public static final String KEY_SHORT_DESC = "shortDescription";
+    public static final String KEY_DESC = "description";
+    public static final String KEY_VIDEO_URL = "videoURL";
+    public static final String KEY_THUMB_URL = "thumbnailUrl";
+
+    public Step(String str,
+                Context context)
     {
-        super(str);
+        super(str, context);
     }
 
     public Step(JSONObject json)
@@ -28,22 +35,22 @@ public class Step extends StepDetail
 
     public String getShortDescription()
     {
-        return JSONHelper.parseValueByKey(mJson, "shortDescription");
+        return JSONHelper.parseValueByKey(mJson, KEY_SHORT_DESC);
     }
 
     public String getDescription()
     {
-        return JSONHelper.parseValueByKey(mJson, "description");
+        return JSONHelper.parseValueByKey(mJson, KEY_DESC);
     }
 
     public Uri getVideoUri()
     {
-        return parseUri("videoURL");
+        return parseUri(KEY_VIDEO_URL);
     }
 
     public Uri getThumbnailUri()
     {
-        return parseUri( "thumbnailUrl");
+        return parseUri( KEY_THUMB_URL);
     }
 
     private Uri parseUri(String key)
