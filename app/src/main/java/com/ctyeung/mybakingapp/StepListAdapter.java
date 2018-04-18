@@ -26,7 +26,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 {
     private static final String TAG = StepListAdapter.class.getSimpleName();
     public static int mViewHolderCount=0;
-    private static List<ItemViewHolder> mHolders=null;
+    private List<ItemViewHolder> mHolders=null;
     private static int mNumberItems=0;
 
     private List<Step> mSteps;
@@ -41,7 +41,6 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 
     static public void Reset()
     {
-        mHolders = null;
         mViewHolderCount = 0;
         mNumberItems = 0;
     }

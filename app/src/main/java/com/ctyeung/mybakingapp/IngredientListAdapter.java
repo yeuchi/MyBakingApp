@@ -26,7 +26,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     private static final String TAG = IngredientListAdapter.class.getSimpleName();
     public static int mSelectedPosition = 0;
     public static int mViewHolderCount=0;
-    private static List<ItemViewHolder> mHolders=null;
+    private List<ItemViewHolder> mHolders=null;
 
     private List<Ingredient> mIngredients;
 
@@ -39,7 +39,6 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     {
         mViewHolderCount = 0;
         mSelectedPosition = 0;
-        mHolders = null;
     }
 
     public IngredientListAdapter(ListItemClickListener listener,
