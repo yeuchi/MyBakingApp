@@ -12,6 +12,7 @@ import android.widget.VideoView;
 
 import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.data.Recipe;
+import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import com.ctyeung.mybakingapp.data.Step;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
 import java.util.List;
@@ -40,12 +41,14 @@ public class StepDetailActivity extends AppCompatActivity
 
     public @BindView(R.id.btn_previous) TextView mBtnPrevious;
     public @BindView(R.id.btn_next) TextView mBtnNext;
+    private SharedPrefUtil mSharedPrefUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
+        mSharedPrefUtil = new SharedPrefUtil(this);
         ButterKnife.bind(this);
 
         parseSteps();
@@ -67,6 +70,8 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void SetFragment()
     {
+        mSharedPrefUtil.setDetailSelected(mRecipeStepIndex);
+
         // remove existing fragment
         if(mFragment != null)
             getSupportFragmentManager()
@@ -121,5 +126,12 @@ public class StepDetailActivity extends AppCompatActivity
                 SetFragment();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        mSharedPrefUtil.setDetailSelected(mRecipeStepIndex);
+        super.onDestroy();
     }
 }

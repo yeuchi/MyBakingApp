@@ -81,7 +81,6 @@ public class StepDetailFragment extends BaseFragment
     private BandwidthMeter mBandwidthMeter;
     private Context mContext;
     private Uri mUri;
-    private SharedPrefUtil mSharedPrefUtil;
 
     ////////////////////////////////////////////////////////////////
 
@@ -96,7 +95,6 @@ public class StepDetailFragment extends BaseFragment
                              Bundle saveInstanceState)
     {
         mContext = this.getActivity();
-        mSharedPrefUtil = new SharedPrefUtil(mContext);
 
         mShouldAutoPlay = true;
         mBandwidthMeter = new DefaultBandwidthMeter();

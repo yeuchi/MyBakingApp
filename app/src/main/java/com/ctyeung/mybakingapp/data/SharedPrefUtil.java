@@ -14,6 +14,7 @@ public class SharedPrefUtil {
     SharedPreferences sharedPreferences;
 
     public static final String STEP_SELECTED = "step";
+    public static final String DETAIL_SELECTED = "detail";
     public static final String INGREDIENT_SELECTED = "ingredient";
     public static final String INGREDIENTS_SELECTED = "ingredients";
     public static final String mPref = "mypref";
@@ -35,6 +36,18 @@ public class SharedPrefUtil {
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(STEP_SELECTED, index);
+        editor.commit();
+    }
+
+    public int getDetailSelected()
+    {
+        return sharedPreferences.getInt(DETAIL_SELECTED, 1);
+    }
+
+    public void setDetailSelected(int index)
+    {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(DETAIL_SELECTED, index);
         editor.commit();
     }
 
