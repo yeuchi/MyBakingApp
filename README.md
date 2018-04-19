@@ -42,12 +42,16 @@ widget -> main -> steps -> ingredients / step detail
 ![steps](https://user-images.githubusercontent.com/1282659/38772164-1c10a72a-3ff6-11e8-9e2a-89f3acf266f0.png)
 ![ingredients](https://user-images.githubusercontent.com/1282659/38772163-1bfe6786-3ff6-11e8-9e8e-8bee0a8a4a85.png)
 ![detail_step](https://user-images.githubusercontent.com/1282659/38772162-1bef594e-3ff6-11e8-9bf8-e4831d66d4a9.png)
+![rotate main](https://user-images.githubusercontent.com/1282659/38967983-23fe8c70-434f-11e8-8d66-e16479e6ca04.png)
+![rotate step](https://user-images.githubusercontent.com/1282659/38967985-25dac45a-434f-11e8-94dd-ee7aa6d8fe78.png)
+![rotate video](https://user-images.githubusercontent.com/1282659/38967978-209acdaa-434f-11e8-9b49-9cde49c92b6c.png)
 
 ## Tablet
 ![widget600](https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png)
 ![mainactivity600](https://user-images.githubusercontent.com/1282659/38772169-2449b4ea-3ff6-11e8-932c-d59ec9251e3c.png)
 ![ingredients600](https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png)
 ![steps600](https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png)
+![rotate 600](https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png)
 
 # References
 
