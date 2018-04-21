@@ -31,6 +31,10 @@ import com.ctyeung.mybakingapp.data.RecipeFactory;
 import com.ctyeung.mybakingapp.utility.JSONHelper;
 import com.ctyeung.mybakingapp.data.SharedPrefUtil;
 import org.json.JSONArray;
+import android.content.Context;
+import android.appwidget.AppWidgetManager;
+import android.widget.RemoteViews;
+import android.content.ComponentName;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
@@ -40,6 +44,9 @@ import static butterknife.ButterKnife.findById;
 /*
  * Reference: Jake Wharton's ButterKnife
  * http://jakewharton.github.io/butterknife/
+ *
+ * update widget solution by Ravi Rupareliya
+ * https://stackoverflow.com/questions/44173839/what-is-appwidgetids-for-widgetprovider-why-always-get-its-value-0
  */
 public class MainActivity extends AppCompatActivity
         implements RecipeListAdapter.ListItemClickListener {
@@ -159,11 +166,22 @@ public class MainActivity extends AppCompatActivity
         JSONArray jsonArray = selectedRecipe.getIngredients();
         mSharedPrefUtil.setIngredientString(jsonArray.toString());
 
-        // load detail page
-        Intent intent = new Intent(this, StepsActivity.class);
-        String str = selectedRecipe.getJSONString();
-        intent.putExtra(Intent.EXTRA_TEXT, str);
-        startActivity(intent);
+        updateWidget();
+    }
+
+    private void updateWidget()
+    {
+        /*
+         * solution by Ravi Rupareliya
+         * https://stackoverflow.com/questions/44173839/what-is-appwidgetids-for-widgetprovider-why-always-get-its-value-0
+         * - slightly modified code
+         */
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds= appWidgetManager.getAppWidgetIds(new ComponentName(getApplication(), HomeScreenWidget.class));
+
+        HomeScreenWidget myWidget = new HomeScreenWidget();
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this),appWidgetIds);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetList);
     }
 
     @Override
