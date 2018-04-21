@@ -13,6 +13,8 @@ public class SharedPrefUtil {
 
     SharedPreferences sharedPreferences;
 
+    public static final String VIDEO_AUTO = "videoAuto";
+    public static final String VIDEO_POS = "video";
     public static final String STEP_SELECTED = "step";
     public static final String DETAIL_SELECTED = "detail";
     public static final String INGREDIENT_SELECTED = "ingredient";
@@ -51,6 +53,22 @@ public class SharedPrefUtil {
         editor.commit();
     }
 
+    public long getVideoPosition()
+    {
+
+        return sharedPreferences.getLong(VIDEO_POS, 1);
+    }
+
+    public void setVideoPosition(long pos)
+    {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(VIDEO_POS, pos);
+        editor.commit();
+
+        // debug
+        long p = getVideoPosition();
+    }
+
     public int getIngredientSelected()
     {
 
@@ -66,8 +84,7 @@ public class SharedPrefUtil {
 
     public String getIngredients()
     {
-        return sharedPreferences.getString(INGREDIENTS_SELECTED,
-                mContext.getResources().getString(R.string.not_available));
+        return sharedPreferences.getString(INGREDIENTS_SELECTED, mContext.getResources().getString(R.string.not_available));
     }
 
     public void setIngredients(String str)
@@ -75,5 +92,20 @@ public class SharedPrefUtil {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(INGREDIENTS_SELECTED, str);
         editor.commit();
+    }
+
+    public boolean getAutoPlayValue()
+    {
+        return sharedPreferences.getBoolean(VIDEO_AUTO, false);
+    }
+
+    public void setAutoPlayValue(boolean isAuto)
+    {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(VIDEO_AUTO, isAuto);
+        editor.commit();
+
+        // debug
+        boolean b = getAutoPlayValue();
     }
 }

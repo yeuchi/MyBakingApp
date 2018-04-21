@@ -70,7 +70,12 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void SetFragment()
     {
-        mSharedPrefUtil.setDetailSelected(mRecipeStepIndex);
+        int lastIndex = mSharedPrefUtil.getDetailSelected();
+        if(lastIndex != mRecipeStepIndex) {
+            mSharedPrefUtil.setVideoPosition(0);
+            mSharedPrefUtil.setAutoPlayValue(true);
+            mSharedPrefUtil.setDetailSelected(mRecipeStepIndex);
+        }
 
         // remove existing fragment
         if(mFragment != null)

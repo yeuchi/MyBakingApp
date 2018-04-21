@@ -16,37 +16,37 @@
         app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
     <LinearLayout
+        android:id="@+id/directions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:gravity="bottom"
         android:orientation="horizontal"
-        android:gravity="top"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/directions">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/btn_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="60dp"
             android:layout_marginRight="100dp"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="60dp"
-            android:layout_gravity="center"
-            android:padding="10dp"
             android:background="#888888"
+            android:padding="10dp"
             android:text="Previous" />
 
         <TextView
             android:id="@+id/btn_next"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="60dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
+            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="100dp"
             android:background="#888888"
-            android:text="Next"/>
+            android:padding="10dp"
+            android:text="Next" />
 
     </LinearLayout>
 

@@ -81,6 +81,7 @@ public class StepDetailFragment extends BaseFragment
     private BandwidthMeter mBandwidthMeter;
     private Context mContext;
     private Uri mUri;
+    private SharedPrefUtil mSharedPrefUtil;
 
     ////////////////////////////////////////////////////////////////
 
@@ -95,8 +96,8 @@ public class StepDetailFragment extends BaseFragment
                              Bundle saveInstanceState)
     {
         mContext = this.getActivity();
+        mSharedPrefUtil = new SharedPrefUtil(mContext);
 
-        mShouldAutoPlay = true;
         mBandwidthMeter = new DefaultBandwidthMeter();
         mMediaDataSourceFactory = new DefaultDataSourceFactory(mContext, Util.getUserAgent(mContext,
                                                                 mContext.getResources().getString(R.string.mediaPlayerSample)),
@@ -213,21 +214,17 @@ public class StepDetailFragment extends BaseFragment
                 new AdaptiveTrackSelection.Factory(mBandwidthMeter);
 
         mTrackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-
         mPlayer = ExoPlayerFactory.newSimpleInstance(mContext, mTrackSelector);
-
         mSimpleExoPlayerView.setPlayer(mPlayer);
-
+        mShouldAutoPlay = mSharedPrefUtil.getAutoPlayValue();
         mPlayer.setPlayWhenReady(mShouldAutoPlay);
 
         DefaultExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-
         MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(mUri.toString()),
                                                             mMediaDataSourceFactory,
                                                             extractorsFactory,
                                                             null,
                                                             null);
-
         mPlayer.stop();
         mPlayer.prepare(mediaSource);
     }
@@ -235,6 +232,7 @@ public class StepDetailFragment extends BaseFragment
     private void releasePlayer() {
         if (mPlayer != null) {
             mShouldAutoPlay = mPlayer.getPlayWhenReady();
+            mSharedPrefUtil.setAutoPlayValue(mShouldAutoPlay);
             mPlayer.stop();
             mPlayer.release();
             mPlayer = null;
@@ -260,6 +258,8 @@ public class StepDetailFragment extends BaseFragment
 
     @Override
     public void onPause() {
+        storeVideoPosition();
+
         super.onPause();
         if (Util.SDK_INT <= 23) {
             releasePlayer();
@@ -268,6 +268,8 @@ public class StepDetailFragment extends BaseFragment
 
     @Override
     public void onStop() {
+        storeVideoPosition();
+
         super.onStop();
         if (Util.SDK_INT > 23) {
             releasePlayer();
@@ -279,5 +281,23 @@ public class StepDetailFragment extends BaseFragment
     {
         onStop();
         super.onDestroy();
+    }
+
+    private void storeVideoPosition()
+    {
+        if(null!=mPlayer) {
+            long pos = mPlayer.getCurrentPosition();
+            mSharedPrefUtil.setVideoPosition(pos);
+        }
+    }
+
+    private long recallVideoPosition()
+    {
+        if(null==mPlayer)
+        return 0;
+
+        long pos = mSharedPrefUtil.getVideoPosition();
+        mPlayer.seekTo(pos);
+        return pos;
     }
 }
