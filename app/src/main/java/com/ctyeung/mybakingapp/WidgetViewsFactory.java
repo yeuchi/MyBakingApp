@@ -34,7 +34,7 @@ public class WidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory
     public void setItems()
     {
         SharedPrefUtil sharedPrefUtil = new SharedPrefUtil(mContext);
-        String str = sharedPrefUtil.getIngredients();
+        String str = sharedPrefUtil.getIngredientString();
 
         String filtered = str.replaceAll("[^a-zA-Z0-9,: ]","");
         mItems = Arrays.asList(filtered.split(","));

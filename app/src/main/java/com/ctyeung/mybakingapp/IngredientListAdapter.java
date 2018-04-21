@@ -24,26 +24,23 @@ import java.util.List;
 public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAdapter.ItemViewHolder>
 {
     private static final String TAG = IngredientListAdapter.class.getSimpleName();
-    public static int mSelectedPosition = 0;
-    public static int mViewHolderCount=0;
-    private List<ItemViewHolder> mHolders=null;
+    public static int mSelectedPosition;
+    public static int mViewHolderCount;
 
+    private List<ItemViewHolder> mHolders=null;
     private List<Ingredient> mIngredients;
+
+    final private ListItemClickListener mClickListener;
 
     public interface ListItemClickListener
     {
         void onListItemClick(int clickItemIndex);
     }
 
-    public static void Reset()
-    {
-        mViewHolderCount = 0;
-        mSelectedPosition = 0;
-    }
-
     public IngredientListAdapter(ListItemClickListener listener,
                                 List<Ingredient> ingredients)
     {
+        mClickListener = listener;
         mIngredients = ingredients;
 
         if(null==mHolders)
@@ -103,6 +100,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
             public void onClick(View v) {
                 int clicked_index = position;
                 updateSelected(clicked_index);
+                mClickListener.onListItemClick(clicked_index);
             }
         });
     }
@@ -154,11 +152,13 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
          */
         void bind(int listIndex)
         {
+            // not used
         }
 
         @Override
         public void onClick(View view)
         {
+            // not used
         }
     }
 }

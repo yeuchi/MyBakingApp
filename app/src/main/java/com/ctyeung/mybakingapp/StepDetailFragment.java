@@ -216,6 +216,12 @@ public class StepDetailFragment extends BaseFragment
         mTrackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
         mPlayer = ExoPlayerFactory.newSimpleInstance(mContext, mTrackSelector);
         mSimpleExoPlayerView.setPlayer(mPlayer);
+
+        // seek to position prior to rotation
+        long pos = mSharedPrefUtil.getVideoPosition();
+        mPlayer.seekTo(pos);
+
+        // set pause or auto play prior to rotation
         mShouldAutoPlay = mSharedPrefUtil.getAutoPlayValue();
         mPlayer.setPlayWhenReady(mShouldAutoPlay);
 
@@ -289,15 +295,5 @@ public class StepDetailFragment extends BaseFragment
             long pos = mPlayer.getCurrentPosition();
             mSharedPrefUtil.setVideoPosition(pos);
         }
-    }
-
-    private long recallVideoPosition()
-    {
-        if(null==mPlayer)
-        return 0;
-
-        long pos = mSharedPrefUtil.getVideoPosition();
-        mPlayer.seekTo(pos);
-        return pos;
     }
 }

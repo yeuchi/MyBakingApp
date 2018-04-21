@@ -26,9 +26,9 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
 {
     private static final String TAG = StepListAdapter.class.getSimpleName();
     public static int mViewHolderCount=0;
-    private List<ItemViewHolder> mHolders=null;
     private static int mNumberItems=0;
 
+    private List<ItemViewHolder> mHolders=null;
     private List<Step> mSteps;
     private int mSelectedPos = 0;
 
@@ -69,7 +69,6 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-
         ItemViewHolder viewHolder = new ItemViewHolder(view);
         mHolders.add(viewHolder);
 
@@ -147,7 +146,6 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ItemVi
          */
         void bind(int listIndex)
         {
-
             //viewHolderName.setText(String.valueOf(listIndex));
         }
 

@@ -35,6 +35,8 @@ public class StepIngredientsFragment extends BaseFragment
     private View mRootView;
     private SharedPrefUtil mSharedPrefUtil;
     private Context mContext;
+    private int scrollY = 0;
+    private int mSelectedIngredientIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -46,37 +48,50 @@ public class StepIngredientsFragment extends BaseFragment
 
         // get last know index
         mSharedPrefUtil = new SharedPrefUtil(mContext);
-        mSelectedPos = mSharedPrefUtil.getStepSelected();
 
         GridLayoutManager reviewManager = new GridLayoutManager(mContext, 1);
         mIngredientList = (RecyclerView) mRootView.findViewById(R.id.ingredient_list);
         mIngredientList.setLayoutManager(reviewManager);
         mListener = this;
 
-        IngredientListAdapter.Reset();
+        // new ingredient list - selection from prior rotation
         mListAdapter = new IngredientListAdapter(mListener, mIngredients);
+        mSelectedIngredientIndex = mSharedPrefUtil.getIngredientSelected();
+        mListAdapter.mSelectedPosition = mSelectedIngredientIndex;
 
         mIngredientList.setAdapter(mListAdapter);
         mIngredientList.setHasFixedSize(true);
 
+        // set scroll position from prior rotation
+        scrollY = mSharedPrefUtil.getIngredListScrollPos();
+        mIngredientList.smoothScrollToPosition(scrollY);
+
+        // set scroll event listener
+        mIngredientList.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                scrollY += dy;
+                mSharedPrefUtil.setIngredListScrollPos(scrollY);
+            }
+        });
         return mRootView;
     }
 
     @Override
-    public void setElement(Recipe recipe,
-                           int selectedPos)
+    public void setElement(Recipe recipe,           // recipe of choice
+                           int selectedStepIndex)   // selected step index -- don't use
     {
+        // don't use selectedStepIndex
         mIngredients = RecipeFactory.IngredientsJsonArray2List(recipe.getIngredients());
-        mSelectedPos = selectedPos;
-
         IngredientListAdapter.mViewHolderCount = 0;
-        IngredientListAdapter.mSelectedPosition = mSelectedPos;
     }
 
     @Override
     public void onListItemClick(int clickItemIndex)
     {
-        // nothing to do here ... maybe highlight selection ?
+        mSelectedIngredientIndex = clickItemIndex;
+        // persist the value into shared preference if rotate
     }
 
     public void onAttach(Context context)
@@ -96,7 +111,7 @@ public class StepIngredientsFragment extends BaseFragment
     @Override
     public void onDestroy()
     {
-        mSharedPrefUtil.setStepSelected(mSelectedPos);
+        mSharedPrefUtil.setIngredientSelected(mSelectedIngredientIndex);
         super.onDestroy();
     }
 

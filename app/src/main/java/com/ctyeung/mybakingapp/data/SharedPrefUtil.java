@@ -13,12 +13,14 @@ public class SharedPrefUtil {
 
     SharedPreferences sharedPreferences;
 
+
+    public static final String INGREDIENT_SCROLL = "ingredientScroll";
     public static final String VIDEO_AUTO = "videoAuto";
     public static final String VIDEO_POS = "video";
     public static final String STEP_SELECTED = "step";
     public static final String DETAIL_SELECTED = "detail";
     public static final String INGREDIENT_SELECTED = "ingredient";
-    public static final String INGREDIENTS_SELECTED = "ingredients";
+    public static final String INGREDIENTS_STRING = "ingredientsString";
     public static final String mPref = "mypref";
 
     private Context mContext;
@@ -27,6 +29,27 @@ public class SharedPrefUtil {
     {
         mContext = context;
         sharedPreferences = mContext.getSharedPreferences(mPref, Context.MODE_PRIVATE);
+    }
+
+    public void resetStepChildren()
+    {
+        setStepSelected(0);
+
+        resetIngredientChildren();
+        resetStepDetailChildren();
+    }
+
+    public void resetStepDetailChildren()
+    {
+        setDetailSelected(0);
+        setAutoPlayValue(true);
+        setVideoPosition(0);
+    }
+
+    public void resetIngredientChildren()
+    {
+        setIngredientSelected(0);
+        setIngredListScrollPos(0);
     }
 
     public int getStepSelected()
@@ -64,9 +87,6 @@ public class SharedPrefUtil {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(VIDEO_POS, pos);
         editor.commit();
-
-        // debug
-        long p = getVideoPosition();
     }
 
     public int getIngredientSelected()
@@ -82,15 +102,15 @@ public class SharedPrefUtil {
         editor.commit();
     }
 
-    public String getIngredients()
+    public String getIngredientString()
     {
-        return sharedPreferences.getString(INGREDIENTS_SELECTED, mContext.getResources().getString(R.string.not_available));
+        return sharedPreferences.getString(INGREDIENTS_STRING, mContext.getResources().getString(R.string.not_available));
     }
 
-    public void setIngredients(String str)
+    public void setIngredientString(String str)
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(INGREDIENTS_SELECTED, str);
+        editor.putString(INGREDIENTS_STRING, str);
         editor.commit();
     }
 
@@ -104,8 +124,18 @@ public class SharedPrefUtil {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(VIDEO_AUTO, isAuto);
         editor.commit();
+    }
 
-        // debug
-        boolean b = getAutoPlayValue();
+    public int getIngredListScrollPos()
+    {
+
+        return sharedPreferences.getInt(INGREDIENT_SCROLL, 1);
+    }
+
+    public void setIngredListScrollPos(int pos)
+    {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(INGREDIENT_SCROLL, pos);
+        editor.commit();
     }
 }

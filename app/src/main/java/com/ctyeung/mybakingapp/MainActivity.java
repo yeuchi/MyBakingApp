@@ -154,9 +154,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
+        mSharedPrefUtil.resetStepChildren();
         Recipe selectedRecipe = mRecipes.get(clickItemIndex);
         JSONArray jsonArray = selectedRecipe.getIngredients();
-        mSharedPrefUtil.setIngredients(jsonArray.toString());
+        mSharedPrefUtil.setIngredientString(jsonArray.toString());
 
         // load detail page
         Intent intent = new Intent(this, StepsActivity.class);

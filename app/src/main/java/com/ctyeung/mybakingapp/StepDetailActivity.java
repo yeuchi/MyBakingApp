@@ -35,7 +35,7 @@ public class StepDetailActivity extends AppCompatActivity
     private List<Step> mSteps;
     private Recipe mRecipe;
 
-    private int mRecipeStepIndex = 1;
+    private int mStepIndex;
     private BaseFragment mFragment;
     private FragmentManager mFragmentManager;
 
@@ -48,8 +48,11 @@ public class StepDetailActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
-        mSharedPrefUtil = new SharedPrefUtil(this);
         ButterKnife.bind(this);
+
+        // set step selection prior to rotation
+        mSharedPrefUtil = new SharedPrefUtil(this);
+        mStepIndex = mSharedPrefUtil.getStepSelected();
 
         parseSteps();
         SetFragment();
@@ -59,7 +62,7 @@ public class StepDetailActivity extends AppCompatActivity
     private void parseSteps()
     {
         // step index
-        mRecipeStepIndex = this.getIntent().getIntExtra(Intent.EXTRA_INDEX, 1);
+        mStepIndex = this.getIntent().getIntExtra(Intent.EXTRA_INDEX, 1);
 
         // recipe
         String str = this.getIntent().getStringExtra(Intent.EXTRA_TEXT);
@@ -70,13 +73,6 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void SetFragment()
     {
-        int lastIndex = mSharedPrefUtil.getDetailSelected();
-        if(lastIndex != mRecipeStepIndex) {
-            mSharedPrefUtil.setVideoPosition(0);
-            mSharedPrefUtil.setAutoPlayValue(true);
-            mSharedPrefUtil.setDetailSelected(mRecipeStepIndex);
-        }
-
         // remove existing fragment
         if(mFragment != null)
             getSupportFragmentManager()
@@ -85,7 +81,7 @@ public class StepDetailActivity extends AppCompatActivity
                     .commit();
 
         // insert fragment
-        if(0==mRecipeStepIndex)
+        if(0==mStepIndex)
         {
             mFragment = new StepIngredientsFragment();
             mFragment.setElement(mRecipe, 0);
@@ -93,7 +89,7 @@ public class StepDetailActivity extends AppCompatActivity
         else
         {
             mFragment = new StepDetailFragment();
-            mFragment.setElements(mSteps, mRecipeStepIndex);
+            mFragment.setElements(mSteps, mStepIndex);
         }
 
         mFragmentManager = getSupportFragmentManager();
@@ -104,14 +100,16 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void buttonClickHandlers()
     {
+        mSharedPrefUtil.resetStepDetailChildren();
+
         mBtnPrevious = (TextView) findViewById(R.id.btn_previous);
         mBtnPrevious.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                mRecipeStepIndex = (mRecipeStepIndex > 0)?
-                                    mRecipeStepIndex-1:0;
+                mStepIndex = (mStepIndex > 0)?
+                              mStepIndex-1:0;
 
                 SetFragment();
             }
@@ -124,9 +122,9 @@ public class StepDetailActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 int size = mSteps.size()-1;
-                mRecipeStepIndex = (mRecipeStepIndex < size)?
-                                    mRecipeStepIndex+1:
-                                    size;
+                mStepIndex = (mStepIndex < size)?
+                              mStepIndex+1:
+                              size;
 
                 SetFragment();
             }
@@ -136,7 +134,7 @@ public class StepDetailActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        mSharedPrefUtil.setDetailSelected(mRecipeStepIndex);
+        mSharedPrefUtil.setDetailSelected(mStepIndex);
         super.onDestroy();
     }
 }

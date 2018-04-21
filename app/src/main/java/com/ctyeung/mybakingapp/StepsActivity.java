@@ -21,7 +21,9 @@ import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
-
+import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
+import android.appwidget.AppWidgetManager;
 /**
  * Created by ctyeung on 3/5/18.
  */
@@ -61,10 +63,20 @@ public class StepsActivity extends AppCompatActivity
         mRecipeList.setLayoutManager(reviewManager);
         mListener = this;
         parseSteps();
-        SetFragment();
+        setFragment();
+        updateWidget();
     }
 
-    private void SetFragment()
+    private void updateWidget()
+    {
+        // https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+        mSharedPrefUtil.setStepSelected(mStepDetailIndex);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), HomeScreenWidget.class));
+        HomeScreenWidget myWidget = new HomeScreenWidget();
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this),ids);
+
+    }
+    private void setFragment()
     {
         isTwoPane = (null==findViewById(R.id.frame_step_detail))?false:true;
 
@@ -112,6 +124,10 @@ public class StepsActivity extends AppCompatActivity
     @Override
     public void onListItemClick(int clickItemIndex)
     {
+        mSharedPrefUtil.resetStepDetailChildren();
+        mSharedPrefUtil.resetIngredientChildren();
+
+        // persist the value into shared preference if rotate
         mStepDetailIndex = clickItemIndex;
 
         // phone mode
@@ -130,7 +146,7 @@ public class StepsActivity extends AppCompatActivity
         // tablet mode
         else
         {
-            SetFragment();
+            setFragment();
         }
     }
 
