@@ -67,6 +67,8 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 
 #### Rotation: SharedPreference persistence
 
+<img src="https://user-images.githubusercontent.com/1282659/39098226-1f92e84e-462d-11e8-9323-f15b3e8e1776.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/39098227-21600116-462d-11e8-8b4b-394644b97d45.png" height="300">
+
 - video position 
 - auto-play/pause setting
 
