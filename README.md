@@ -37,44 +37,44 @@ widget -> main -> steps -> ingredients / step detail
 
 ## Phone
 
-<img src="https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png" width="100">
-![recipe](https://user-images.githubusercontent.com/1282659/39097449-0f2d4b6c-4622-11e8-8f2b-41302ddcbfed.png)<!-- .element height="50%" width="50%" -->
-![screen shot 2018-04-22 at 11 47 25 am](https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png)
-![ingredients](https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png)
-![video](https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png)
+<img src="https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097449-0f2d4b6c-4622-11e8-8f2b-41302ddcbfed.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png" width="200">
 
 #### Widget update
 - each recipe selection invokes WidgetProvider.onUpdate()
 
-![widget_update](https://user-images.githubusercontent.com/1282659/39097639-bdbb1dba-4624-11e8-9b49-b2d44f048f74.png)
-![update_widget](https://user-images.githubusercontent.com/1282659/39097527-1acdcfc2-4623-11e8-8280-09fe8001d5ea.png)
+<img src="https://user-images.githubusercontent.com/1282659/39097639-bdbb1dba-4624-11e8-9b49-b2d44f048f74.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097527-1acdcfc2-4623-11e8-8280-09fe8001d5ea.png" width="200">
 
 #### Rotation: SharedPreference persistence 
-![rotate_recipe](https://user-images.githubusercontent.com/1282659/39097529-1c5a7c6e-4623-11e8-8a40-0087555ae128.png)
+<img src="https://user-images.githubusercontent.com/1282659/39097529-1c5a7c6e-4623-11e8-8a40-0087555ae128.png" width="200">
 
 - selected step highlight
 
-![screen shot 2018-04-22 at 11 47 25 am](https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png)
-![rotate_steps](https://user-images.githubusercontent.com/1282659/39097530-1dfafbca-4623-11e8-96f7-55fd67f61ede.png)
+<img src="https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097530-1dfafbca-4623-11e8-96f7-55fd67f61ede.png" height="200">
 
 - video position 
 - auto-play/pause setting
 
-![video](https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png)
-![persist_video_pause](https://user-images.githubusercontent.com/1282659/39097456-18ce3dd4-4622-11e8-99c6-412421ab8bea.png)
+<img src="https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097456-18ce3dd4-4622-11e8-99c6-412421ab8bea.png" height="200">
 
 - scroll position 
 - selected ingredient highlight
 
-![ingredients](https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png)
-![rotate_ingredient](https://user-images.githubusercontent.com/1282659/39097458-1ab0e138-4622-11e8-96bf-57438fab776b.png)
+<img src="https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png" width="200">
+<img src="https://user-images.githubusercontent.com/1282659/39097458-1ab0e138-4622-11e8-96bf-57438fab776b.png" height="200">
 
 ## Tablet
-![widget600](https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png)
-![mainactivity600](https://user-images.githubusercontent.com/1282659/38772169-2449b4ea-3ff6-11e8-932c-d59ec9251e3c.png)
-![ingredients600](https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png)
-![steps600](https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png)
-![rotate 600](https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png)
+<img src="https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/38772169-2449b4ea-3ff6-11e8-932c-d59ec9251e3c.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png" width="300">
 
 # References
 
