@@ -44,8 +44,9 @@ widget -> main -> steps -> ingredients / step detail
 ![video](https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png)
 
 #### Widget update
-- recipe select invokes onUpdate()
+- each recipe selection invokes WidgetProvider.onUpdate()
 
+![widget](https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png)
 ![update_widget](https://user-images.githubusercontent.com/1282659/39097527-1acdcfc2-4623-11e8-8280-09fe8001d5ea.png)
 
 #### Rotation: SharedPreference persistence 
@@ -53,16 +54,19 @@ widget -> main -> steps -> ingredients / step detail
 
 - selected step highlight
 
+![screen shot 2018-04-22 at 11 47 25 am](https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png)
 ![rotate_steps](https://user-images.githubusercontent.com/1282659/39097530-1dfafbca-4623-11e8-96f7-55fd67f61ede.png)
 
 - video position 
 - auto-play/pause setting
 
+![video](https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png)
 ![persist_video_pause](https://user-images.githubusercontent.com/1282659/39097456-18ce3dd4-4622-11e8-99c6-412421ab8bea.png)
 
 - scroll position 
 - selected ingredient highlight
 
+![ingredients](https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png)
 ![rotate_ingredient](https://user-images.githubusercontent.com/1282659/39097458-1ab0e138-4622-11e8-96bf-57438fab776b.png)
 
 ## Tablet
