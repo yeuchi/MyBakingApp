@@ -38,13 +38,16 @@ widget -> main -> steps -> ingredients / step detail
 ## Phone
 
 ![widget](https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png)
-![mainactivity](https://user-images.githubusercontent.com/1282659/38772165-1c1f1044-3ff6-11e8-9df2-e7f71a674782.png)
-![steps](https://user-images.githubusercontent.com/1282659/38772164-1c10a72a-3ff6-11e8-9e2a-89f3acf266f0.png)
-![ingredients](https://user-images.githubusercontent.com/1282659/38772163-1bfe6786-3ff6-11e8-9e8e-8bee0a8a4a85.png)
-![detail_step](https://user-images.githubusercontent.com/1282659/38772162-1bef594e-3ff6-11e8-9bf8-e4831d66d4a9.png)
-![rotate main](https://user-images.githubusercontent.com/1282659/38967983-23fe8c70-434f-11e8-8d66-e16479e6ca04.png)
-![rotate step](https://user-images.githubusercontent.com/1282659/38967985-25dac45a-434f-11e8-94dd-ee7aa6d8fe78.png)
-![rotate video](https://user-images.githubusercontent.com/1282659/38967978-209acdaa-434f-11e8-9b49-9cde49c92b6c.png)
+![recipe](https://user-images.githubusercontent.com/1282659/39097449-0f2d4b6c-4622-11e8-8f2b-41302ddcbfed.png)
+![steps](https://user-images.githubusercontent.com/1282659/39097452-10f51858-4622-11e8-93ca-386415f16e86.png)
+![ingredients](https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png)
+![video](https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png)
+
+### Rotation: SharedPreference persist selected step highlight, video position + auto-play/pause setting
+![persist_video_pause](https://user-images.githubusercontent.com/1282659/39097456-18ce3dd4-4622-11e8-99c6-412421ab8bea.png)
+
+### Rotation: SharedPreference persist scroll position + selected ingredient highlight
+![rotate_ingredient](https://user-images.githubusercontent.com/1282659/39097458-1ab0e138-4622-11e8-96bf-57438fab776b.png)
 
 ## Tablet
 ![widget600](https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png)
