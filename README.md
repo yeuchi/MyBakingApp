@@ -46,7 +46,7 @@ widget -> main -> steps -> ingredients / step detail
 #### Widget update
 - each recipe selection invokes WidgetProvider.onUpdate()
 
-![widget](https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png)
+![widget_update](https://user-images.githubusercontent.com/1282659/39097639-bdbb1dba-4624-11e8-9b49-b2d44f048f74.png)
 ![update_widget](https://user-images.githubusercontent.com/1282659/39097527-1acdcfc2-4623-11e8-8280-09fe8001d5ea.png)
 
 #### Rotation: SharedPreference persistence 
