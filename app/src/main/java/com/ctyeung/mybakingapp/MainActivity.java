@@ -42,11 +42,13 @@ import butterknife.BindView;
 import static butterknife.ButterKnife.findById;
 
 /*
- * Reference: Jake Wharton's ButterKnife
+ * Referencea:
+ *
+ * Jake Wharton's ButterKnife
  * http://jakewharton.github.io/butterknife/
  *
- * update widget solution by Ravi Rupareliya
- * https://stackoverflow.com/questions/44173839/what-is-appwidgetids-for-widgetprovider-why-always-get-its-value-0
+ * Ravi Rupareliya's solution to update widget
+ * https://stackoverflow.com/questions/28941472/update-listview-widget-with-application
  */
 public class MainActivity extends AppCompatActivity
         implements RecipeListAdapter.ListItemClickListener {
@@ -167,18 +169,24 @@ public class MainActivity extends AppCompatActivity
         mSharedPrefUtil.setIngredientString(jsonArray.toString());
 
         updateWidget();
+
+        // load detail page
+        Intent intent = new Intent(this, StepsActivity.class);
+        String str = selectedRecipe.getJSONString();
+        intent.putExtra(Intent.EXTRA_TEXT, str);
+        startActivity(intent);
     }
 
     private void updateWidget()
     {
         /*
-         * solution by Ravi Rupareliya
-         * https://stackoverflow.com/questions/44173839/what-is-appwidgetids-for-widgetprovider-why-always-get-its-value-0
-         * - slightly modified code
+         * Ravi Rupareliya's solution to update widget
+         * https://stackoverflow.com/questions/28941472/update-listview-widget-with-application
          */
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds= appWidgetManager.getAppWidgetIds(new ComponentName(getApplication(), HomeScreenWidget.class));
 
+        //Toast.makeText(this,"ids:size:"+appWidgetIds.length,Toast.LENGTH_SHORT).show();
         HomeScreenWidget myWidget = new HomeScreenWidget();
         myWidget.onUpdate(this, AppWidgetManager.getInstance(this),appWidgetIds);
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetList);
