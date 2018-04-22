@@ -45,20 +45,24 @@ widget -> main -> steps -> ingredients / step detail
 
 #### Widget update
 - recipe select invokes onUpdate()
+
 ![update_widget](https://user-images.githubusercontent.com/1282659/39097527-1acdcfc2-4623-11e8-8280-09fe8001d5ea.png)
 
 #### Rotation: SharedPreference persistence 
 ![rotate_recipe](https://user-images.githubusercontent.com/1282659/39097529-1c5a7c6e-4623-11e8-8a40-0087555ae128.png)
 
 - selected step highlight
+
 ![rotate_steps](https://user-images.githubusercontent.com/1282659/39097530-1dfafbca-4623-11e8-96f7-55fd67f61ede.png)
 
 - video position 
 - auto-play/pause setting
+
 ![persist_video_pause](https://user-images.githubusercontent.com/1282659/39097456-18ce3dd4-4622-11e8-99c6-412421ab8bea.png)
 
 - scroll position 
 - selected ingredient highlight
+
 ![rotate_ingredient](https://user-images.githubusercontent.com/1282659/39097458-1ab0e138-4622-11e8-96bf-57438fab776b.png)
 
 ## Tablet
