@@ -68,8 +68,7 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 #### Widget update
 - each recipe selection invokes WidgetProvider.onUpdate()
 
-<img src="https://user-images.githubusercontent.com/1282659/39098492-5653a978-4631-11e8-84f1-8edfb6a05200.png" width="300">
-<img src="https://user-images.githubusercontent.com/1282659/39098493-5669e3d2-4631-11e8-99d4-bf9ccb4c5ef3.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/39098492-5653a978-4631-11e8-84f1-8edfb6a05200.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/39098493-5669e3d2-4631-11e8-99d4-bf9ccb4c5ef3.png" width="300">
 
 #### Rotation: SharedPreference persistence
 
@@ -83,12 +82,7 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 - scroll position 
 - selected ingredient with highlight
 
-<img src="https://user-images.githubusercontent.com/1282659/39098494-58df8bee-4631-11e8-8d4e-dfbd4bf0d5fb.png" width="300">
-<img src="https://user-images.githubusercontent.com/1282659/39098495-590d37e2-4631-11e8-8d19-ef8569ef9ecd.png" width="300">
-
-![step](https://user-images.githubusercontent.com/1282659/39098496-591cca22-4631-11e8-8ddc-0a55d5cbdfa5.png)
-![rotate_step](https://user-images.githubusercontent.com/1282659/39098497-592b61c2-4631-11e8-8b22-81489c61b9a4.png)
-
+<img src="https://user-images.githubusercontent.com/1282659/39098494-58df8bee-4631-11e8-8d4e-dfbd4bf0d5fb.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/39098495-590d37e2-4631-11e8-8d19-ef8569ef9ecd.png" height="300">
 
 # References
 
