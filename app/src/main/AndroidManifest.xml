@@ -22,9 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StepsActivity" />
-        <activity android:name=".IngredientsActivity" />
-        <activity android:name=".StepDetailActivity" />
+        <activity android:name=".StepsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".IngredientsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".StepDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver android:name=".HomeScreenWidget">
             <intent-filter>

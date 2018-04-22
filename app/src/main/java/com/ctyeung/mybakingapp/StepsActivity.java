@@ -3,9 +3,11 @@ package com.ctyeung.mybakingapp;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,6 +26,8 @@ import butterknife.BindView;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.appwidget.AppWidgetManager;
+
+import android.view.MenuItem;
 /**
  * Created by ctyeung on 3/5/18.
  */
@@ -44,9 +48,7 @@ public class StepsActivity extends AppCompatActivity
     private int mStepDetailIndex = 0;
     private BaseFragment mFragment=null;
     private FragmentManager mFragmentManager;
-
     private SharedPrefUtil mSharedPrefUtil;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,6 +56,16 @@ public class StepsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
         ButterKnife.bind(this);
+
+        // tool is defined in the layout file
+        Toolbar toolbar = (Toolbar) findViewById(R.id.step_toolbar);
+        setSupportActionBar(toolbar);
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
         // get last know index
         mSharedPrefUtil = new SharedPrefUtil(getApplicationContext());
@@ -65,6 +77,17 @@ public class StepsActivity extends AppCompatActivity
         parseSteps();
         setFragment();
         updateWidget();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                Intent homeIntent = new Intent(this, MainActivity.class);
+                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+        }
+        return (super.onOptionsItemSelected(menuItem));
     }
 
     private void updateWidget()
