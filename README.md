@@ -32,7 +32,7 @@ One of the skills you will demonstrate in this project is how to handle unexpect
 # Layout 
 https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks/bakingapp-mocks.pdf
 
-# Implementation screenshots of workflow + features below
+# workflow + features implementation
 - Activities available (in order of operation): widget -> main -> steps -> ingredients / step detail.
 - Return Home: click on Toolbar up arrow '<-' MyBakingApp.
 
