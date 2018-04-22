@@ -32,8 +32,8 @@ One of the skills you will demonstrate in this project is how to handle unexpect
 # Layout 
 https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks/bakingapp-mocks.pdf
 
-# Implementation screenshots: 
-widget -> main -> steps -> ingredients / step detail
+# Implementation screenshots of workflow + features below
+Activities available (in order of operation): widget -> main -> steps -> ingredients / step detail
 
 ## Phone
 
@@ -47,7 +47,7 @@ widget -> main -> steps -> ingredients / step detail
 #### Rotation: SharedPreference persistence 
 <img src="https://user-images.githubusercontent.com/1282659/39097449-0f2d4b6c-4622-11e8-8f2b-41302ddcbfed.png" width="200"><img src="https://user-images.githubusercontent.com/1282659/39097529-1c5a7c6e-4623-11e8-8a40-0087555ae128.png" height="200">
 
-- selected step highlight
+- selected step with highlight
 
 <img src="https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png" width="200"><img src="https://user-images.githubusercontent.com/1282659/39097530-1dfafbca-4623-11e8-96f7-55fd67f61ede.png" height="200">
 
@@ -57,7 +57,7 @@ widget -> main -> steps -> ingredients / step detail
 <img src="https://user-images.githubusercontent.com/1282659/39097454-1500f6e2-4622-11e8-8ac1-6ca43d91b5af.png" width="200"><img src="https://user-images.githubusercontent.com/1282659/39097456-18ce3dd4-4622-11e8-99c6-412421ab8bea.png" height="200">
 
 - scroll position 
-- selected ingredient highlight
+- selected ingredient with highlight
 
 <img src="https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png" width="200"><img src="https://user-images.githubusercontent.com/1282659/39097458-1ab0e138-4622-11e8-96bf-57438fab776b.png" height="200">
 
@@ -65,6 +65,11 @@ widget -> main -> steps -> ingredients / step detail
 <img src="https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38772169-2449b4ea-3ff6-11e8-932c-d59ec9251e3c.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300">
 
 #### Rotation: SharedPreference persistence
+
+- video position 
+- auto-play/pause setting
+
+<img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300">
 <img src="https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png" height="300">
 
 # References
