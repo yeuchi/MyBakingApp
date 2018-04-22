@@ -69,8 +69,7 @@ Activities available (in order of operation): widget -> main -> steps -> ingredi
 - video position 
 - auto-play/pause setting
 
-<img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300">
-<img src="https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png" height="300">
+<img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png" height="300">
 
 # References
 
