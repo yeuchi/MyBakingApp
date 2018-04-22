@@ -76,7 +76,6 @@ public class StepsActivity extends AppCompatActivity
         mListener = this;
         parseSteps();
         setFragment();
-        updateWidget();
     }
 
     @Override
@@ -90,15 +89,6 @@ public class StepsActivity extends AppCompatActivity
         return (super.onOptionsItemSelected(menuItem));
     }
 
-    private void updateWidget()
-    {
-        // https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-        mSharedPrefUtil.setStepSelected(mStepDetailIndex);
-        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), HomeScreenWidget.class));
-        HomeScreenWidget myWidget = new HomeScreenWidget();
-        myWidget.onUpdate(this, AppWidgetManager.getInstance(this),ids);
-
-    }
     private void setFragment()
     {
         isTwoPane = (null==findViewById(R.id.frame_step_detail))?false:true;

@@ -41,7 +41,6 @@ public class SharedPrefUtil {
 
     public void resetStepDetailChildren()
     {
-        setDetailSelected(0);
         setAutoPlayValue(true);
         setVideoPosition(0);
     }
@@ -61,18 +60,6 @@ public class SharedPrefUtil {
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(STEP_SELECTED, index);
-        editor.commit();
-    }
-
-    public int getDetailSelected()
-    {
-        return sharedPreferences.getInt(DETAIL_SELECTED, 1);
-    }
-
-    public void setDetailSelected(int index)
-    {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(DETAIL_SELECTED, index);
         editor.commit();
     }
 

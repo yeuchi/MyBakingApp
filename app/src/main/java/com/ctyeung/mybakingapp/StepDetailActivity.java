@@ -97,6 +97,8 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void SetFragment()
     {
+        mSharedPrefUtil.setStepSelected(mStepIndex);
+
         // remove existing fragment
         if(mFragment != null)
             getSupportFragmentManager()
@@ -124,14 +126,14 @@ public class StepDetailActivity extends AppCompatActivity
 
     private void buttonClickHandlers()
     {
-        mSharedPrefUtil.resetStepDetailChildren();
-
         mBtnPrevious = (TextView) findViewById(R.id.btn_previous);
         mBtnPrevious.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                mSharedPrefUtil.resetStepDetailChildren();
+
                 mStepIndex = (mStepIndex > 0)?
                               mStepIndex-1:0;
 
@@ -145,6 +147,8 @@ public class StepDetailActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                mSharedPrefUtil.resetStepDetailChildren();
+
                 int size = mSteps.size()-1;
                 mStepIndex = (mStepIndex < size)?
                               mStepIndex+1:
@@ -153,12 +157,5 @@ public class StepDetailActivity extends AppCompatActivity
                 SetFragment();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        mSharedPrefUtil.setDetailSelected(mStepIndex);
-        super.onDestroy();
     }
 }
