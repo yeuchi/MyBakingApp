@@ -65,6 +65,12 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 ## Tablet
 <img src="https://user-images.githubusercontent.com/1282659/38772205-d6d48f04-3ff6-11e8-8f46-1ab9daee555d.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/39098226-1f92e84e-462d-11e8-9323-f15b3e8e1776.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38772168-243a3a9c-3ff6-11e8-8b31-8b6a37a01e04.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300">
 
+#### Widget update
+- each recipe selection invokes WidgetProvider.onUpdate()
+
+<img src="https://user-images.githubusercontent.com/1282659/39098492-5653a978-4631-11e8-84f1-8edfb6a05200.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/39098493-5669e3d2-4631-11e8-99d4-bf9ccb4c5ef3.png" width="300">
+
 #### Rotation: SharedPreference persistence
 
 <img src="https://user-images.githubusercontent.com/1282659/39098226-1f92e84e-462d-11e8-9323-f15b3e8e1776.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/39098227-21600116-462d-11e8-8b4b-394644b97d45.png" height="300">
@@ -72,7 +78,17 @@ https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58dee986_bakingapp-mocks
 - video position 
 - auto-play/pause setting
 
-<img src="https://user-images.githubusercontent.com/1282659/38772167-2429ecb4-3ff6-11e8-83ff-1db322fb2781.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/38967981-223ba2d8-434f-11e8-86b8-b206510e4c47.png" height="300">
+<img src="https://user-images.githubusercontent.com/1282659/39098496-591cca22-4631-11e8-8ddc-0a55d5cbdfa5.png" width="300"><img src="https://user-images.githubusercontent.com/1282659/39098497-592b61c2-4631-11e8-8b22-81489c61b9a4.png" height="300">
+
+- scroll position 
+- selected ingredient with highlight
+
+<img src="https://user-images.githubusercontent.com/1282659/39098494-58df8bee-4631-11e8-8d4e-dfbd4bf0d5fb.png" width="300">
+<img src="https://user-images.githubusercontent.com/1282659/39098495-590d37e2-4631-11e8-8d19-ef8569ef9ecd.png" width="300">
+
+![step](https://user-images.githubusercontent.com/1282659/39098496-591cca22-4631-11e8-8ddc-0a55d5cbdfa5.png)
+![rotate_step](https://user-images.githubusercontent.com/1282659/39098497-592b61c2-4631-11e8-8b22-81489c61b9a4.png)
+
 
 # References
 
