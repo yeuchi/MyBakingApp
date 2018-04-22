@@ -37,7 +37,7 @@ widget -> main -> steps -> ingredients / step detail
 
 ## Phone
 
-![widget](https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png)<!-- .element height="50%" width="50%" -->
+<img src="https://user-images.githubusercontent.com/1282659/38772161-11906560-3ff6-11e8-9c52-f184b9571909.png" width="100">
 ![recipe](https://user-images.githubusercontent.com/1282659/39097449-0f2d4b6c-4622-11e8-8f2b-41302ddcbfed.png)<!-- .element height="50%" width="50%" -->
 ![screen shot 2018-04-22 at 11 47 25 am](https://user-images.githubusercontent.com/1282659/39097531-1fa42c44-4623-11e8-827e-cf684459d4ab.png)
 ![ingredients](https://user-images.githubusercontent.com/1282659/39097455-16edbabc-4622-11e8-9381-bed2d0664af0.png)
