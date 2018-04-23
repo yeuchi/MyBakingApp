@@ -45,22 +45,50 @@ public class Step extends StepDetail
 
     public Uri getVideoUri()
     {
-        return parseUri(KEY_VIDEO_URL);
+        Uri uri = parseVideoUri(KEY_VIDEO_URL);
+        if (null!=uri)
+            return uri;
+
+        // check thumbnail if it has uri
+        uri = parseVideoUri(KEY_THUMB_URL);
+        return uri;
     }
 
-    public Uri getThumbnailUri()
-    {
-        return parseUri( KEY_THUMB_URL);
-    }
-
-    private Uri parseUri(String key)
+    private Uri parseVideoUri(String key)
     {
         String str = JSONHelper.parseValueByKey(mJson, key);
+        if(null!=str) {
+
+            String checkString = str.toLowerCase();
+            if (checkString.contains(".jpg") ||
+                checkString.contains(".jpeg")||
+                    checkString.contains(".png") ||
+                    checkString.contains(".gif"))
+                return null;
+        }
+
         Uri uri = (null==str || 0==str.length())?
                     null:
                     Uri.parse(str);
 
         return uri;
+    }
+
+    public Uri getThumbnailUri()
+    {
+        String str = JSONHelper.parseValueByKey(mJson, KEY_THUMB_URL);
+
+        if(null!=str) {
+            String checkString = str.toLowerCase();
+
+            if (checkString.contains(".jpg") ||
+                    checkString.contains(".jpeg")||
+                    checkString.contains(".png") ||
+                    checkString.contains(".gif"))
+                return Uri.parse(str);
+        }
+
+        return null;
     }
 
     public String getJSONString()

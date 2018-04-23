@@ -58,6 +58,8 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.TransferListener;
 import com.google.android.exoplayer2.util.Util;
 import android.content.Context;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Callback;
 
 /**
  * Created by ctyeung on 3/17/18.
@@ -141,6 +143,7 @@ public class StepDetailFragment extends BaseFragment
             Step step = mSteps.get(mRecipeStepIndex);
             loadDescription(step);
             loadVideo(step);
+            loadThumbnail(step);
         }
     }
 
@@ -169,11 +172,9 @@ public class StepDetailFragment extends BaseFragment
         ProgressBar progressBar = (ProgressBar)mRootView.findViewById(R.id.fragment_progress);
         progressBar.setVisibility(View.INVISIBLE);
 
-        Uri videoUri = step.getVideoUri();
-        Uri thumbnailUri = step.getThumbnailUri();
+        mUri = step.getVideoUri();
 
-        if(null == videoUri &&
-                null == thumbnailUri)
+        if(null == mUri)
         {
             // show error
             textView.setVisibility(View.VISIBLE);
@@ -183,16 +184,36 @@ public class StepDetailFragment extends BaseFragment
             return;
         }
         else {
-            mUri = (null==videoUri)?
-                        thumbnailUri:
-                        videoUri;
-
             textView.setVisibility(View.INVISIBLE);
             mSimpleExoPlayerView.setVisibility(View.VISIBLE);
             initializePlayer();
         }
     }
 
+    private void loadThumbnail(Step step)
+    {
+        Uri thumbnailUri = step.getThumbnailUri();
+
+        if(null!= thumbnailUri)
+        {
+            ImageView imageView = (ImageView) mRootView.findViewById(R.id.thumbnail);
+            imageView.setVisibility(View.VISIBLE);
+
+            Picasso.with(imageView.getContext())
+                    .load(thumbnailUri)
+                    .into(imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onError() {
+                            Toast.makeText(mContext, "load thumbnail failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
     //////////////////////////////////////////////
     // exo-video-player
 
