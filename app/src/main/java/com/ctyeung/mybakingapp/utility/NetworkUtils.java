@@ -28,7 +28,8 @@ public class NetworkUtils
      */
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
+        urlConnection.setConnectTimeout(3000);
+        
         try
         {
             InputStream in = urlConnection.getInputStream();
